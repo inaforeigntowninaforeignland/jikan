@@ -1,4 +1,10 @@
 ######################
+# JHipster
+######################
+.jhipster
+*.jdl
+
+######################
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css

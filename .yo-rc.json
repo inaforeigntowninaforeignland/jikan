@@ -37,6 +37,6 @@
     "serviceDiscoveryType": false,
     "enableHibernateCache": true,
     "reactive": false,
-    "languages": ["en", "fr"]
+    "languages": ["en"]
   }
 }
