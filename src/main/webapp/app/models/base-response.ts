@@ -1,3 +1,4 @@
+// TODO Add JSDoc
 interface IBaseResponse {
   requestCacheExpiry: number;
 

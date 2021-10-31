@@ -3,13 +3,14 @@ import { Type } from 'class-transformer';
 import AbstractBaseResponse from 'app/models/impl/abstract-base-response';
 
 import ITopDetail from '../top-detail';
+import ITop from '../top';
 
-abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse {
+abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse implements ITop<T> {
   /**
    * @see {@link https://github.com/typestack/class-transformer#working-with-generics}
    */
   // eslint-disable-next-line @typescript-eslint/ban-types
-  private type: Function;
+  type: Function;
 
   @Type(options => {
     return (options?.newObject as AbstractTop<T>).type;

@@ -1,5 +1,9 @@
+// TODO Add JSDoc
 interface ITopDetail {
-  malId: number;
+  /**
+   * ID
+   */
+  id: number;
 
   rank: number;
 

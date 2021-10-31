@@ -2,7 +2,6 @@ import { Expose } from 'class-transformer';
 
 import IBaseResponse from '../base-response';
 
-// TODO Add JSDoc
 abstract class AbstractBaseResponse implements IBaseResponse {
   @Expose({ name: 'request_cache_expiry' })
   requestCacheExpiry: number;

@@ -6,7 +6,7 @@ abstract class AbstractTopDetail implements ITopDetail {
   rank: number;
 
   @Expose({ name: 'mal_id' })
-  malId: number;
+  id: number;
 
   title: string;
 
