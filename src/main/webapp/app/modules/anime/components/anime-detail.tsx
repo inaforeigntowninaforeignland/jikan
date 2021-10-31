@@ -4,7 +4,7 @@ import { Button, Row, Col } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const TopDetail = (props: RouteComponentProps<{ id: string }>) => {
+export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
   return (
@@ -30,4 +30,4 @@ export const TopDetail = (props: RouteComponentProps<{ id: string }>) => {
   );
 };
 
-export default TopDetail;
+export default AnimeDetail;
