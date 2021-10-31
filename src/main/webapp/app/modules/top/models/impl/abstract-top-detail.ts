@@ -1,6 +1,6 @@
 import { Expose, Type } from 'class-transformer';
 
-import ITopDetail from './top-detail';
+import ITopDetail from '../top-detail';
 
 abstract class AbstractTopDetail implements ITopDetail {
   rank: number;

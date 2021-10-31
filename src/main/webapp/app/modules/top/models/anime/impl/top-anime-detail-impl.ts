@@ -1,4 +1,4 @@
-import AbstractTopDetail from 'app/modules/top/models/abstract-top-detail';
+import AbstractTopDetail from 'app/modules/top/models/impl/abstract-top-detail';
 
 import ITopAnimeDetail from '../top-anime-detail';
 

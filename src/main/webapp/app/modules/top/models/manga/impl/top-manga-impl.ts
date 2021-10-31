@@ -1,4 +1,4 @@
-import AbstractTop from 'app/modules/top/models/abstract-top';
+import AbstractTop from 'app/modules/top/models/impl/abstract-top';
 
 import TopMangaDetailImpl from '../impl/top-manga-detail-impl';
 import ITopMangaDetail from '../top-manga-detail';

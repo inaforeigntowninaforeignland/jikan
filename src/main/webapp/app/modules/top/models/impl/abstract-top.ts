@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 
 import AbstractBaseResponse from 'app/models/impl/abstract-base-response';
 
-import ITopDetail from './top-detail';
+import ITopDetail from '../top-detail';
 
 abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse {
   /**
