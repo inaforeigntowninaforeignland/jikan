@@ -1,6 +1,6 @@
 import IBaseResponse from 'app/models/base-response';
 
-// TODO Add JSDoc
+// TODO Add JSDoc Describe other fields
 interface IAnime extends IBaseResponse {
   id: number;
 

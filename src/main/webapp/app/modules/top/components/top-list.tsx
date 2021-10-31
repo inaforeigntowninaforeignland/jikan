@@ -4,7 +4,7 @@ import { Button, Table } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useFetchTopAnime } from '../hooks/use-fetch-top-anime';
+import { useFetchTopAnime } from '../caches/use-fetch-top-anime';
 import AnimeSubtypeType from '../enums/anime-subtype-type';
 
 export const TopList = (props: RouteComponentProps<{ url: string }>) => {
@@ -25,7 +25,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
         </div>
       </h2>
 
-      <div className="table-responsive">
+      <div className="table-responsive text-center">
         {response?.top?.length > 0 ? (
           <Table responsive>
             <tbody>
