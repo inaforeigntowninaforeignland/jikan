@@ -7,7 +7,7 @@ import { SERVER_API_URL } from 'app/config/constants';
 const TIMEOUT = 60 * 1000;
 
 export const axiosInstance = axios.create({
-  baseURL: `${SERVER_API_URL}/v3/`,
+  baseURL: `${SERVER_API_URL}v3/`,
   responseType: 'json',
   timeout: TIMEOUT,
   validateStatus(status) {

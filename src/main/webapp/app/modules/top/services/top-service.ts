@@ -1,24 +1,45 @@
 import RequestType from 'app/shared/utils/http-client/enums/request-type';
 import { request } from 'app/shared/utils/http-client';
 
-import TopResponse from '../models/top-response';
-import SubtypeType from '../enums/subtype-type';
+import AnimeSubtypeType from '../enums/anime-subtype-type';
+import MangaSubtypeType from '../enums/manga-subtype-type';
+import BothSubtypeType from '../enums/both-subtype-type';
 import TopType from '../enums/top-type';
 
+import TopAnimeImpl from '../models/anime/impl/top-anime-impl';
+import TopMangaImpl from '../models/manga/impl/top-manga-impl';
+
+/**
+ * @see {@link https://jikan.docs.apiary.io/#reference/0/top}
+ */
 export default {
   /**
-   * Top items on MyAnimeList
-   * @param type {TopType} Top items of this type
-   * @param [page] {number} The Top page on MyAnimeList is paginated offers 50 items per page
-   * @param [subtype] {SubtypeType}
+   * Get top anime list
+   * @param [page] {number} Page
+   * @param [subtype] {AnimeSubtypeType | BothSubtypeType}
    */
-  getTopList(type: TopType, page?: number, subtype?: SubtypeType) {
-    return request<TopResponse>(
+  getTopAnime(page?: number, subtype?: AnimeSubtypeType | BothSubtypeType) {
+    return request<TopAnimeImpl>(
       {
         method: RequestType.GET,
-        url: `/top/${type}/${page}/${subtype}`,
+        url: `/top/${TopType.ANIME}/${page}/${subtype}`,
       },
-      TopResponse
+      TopAnimeImpl
+    );
+  },
+
+  /**
+   * Get top manga list
+   * @param [page] {number} Page
+   * @param [subtype] {MangaSubtypeType | BothSubtypeType}
+   */
+  getTopManga(page?: number, subtype?: MangaSubtypeType | BothSubtypeType) {
+    return request<TopMangaImpl>(
+      {
+        method: RequestType.GET,
+        url: `/top/${TopType.MANGA}/${page}/${subtype}`,
+      },
+      TopMangaImpl
     );
   },
 };
