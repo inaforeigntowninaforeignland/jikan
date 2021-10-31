@@ -1,12 +1,14 @@
+import 'reflect-metadata';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import ErrorBoundary from './shared/error/error-boundary';
-import AppComponent from './app';
+import { queryClient } from './shared/utils/query-client';
 import { loadIcons } from './config/icon-loader';
-import { queryClient } from './config/query-client';
+import AppComponent from './app';
 
 loadIcons();
 
