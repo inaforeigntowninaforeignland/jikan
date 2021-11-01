@@ -13,7 +13,7 @@ export const setupAxiosInterceptors = axiosInstance => {
 
   const onResponseError = error => {
     toast.error(`${error.message}`, {
-      position: 'top-left',
+      position: 'bottom-right',
       autoClose: false,
       hideProgressBar: false,
       closeOnClick: true,

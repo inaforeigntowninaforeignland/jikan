@@ -63,13 +63,13 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
       {response?.top?.length > 0 ? (
         <>
-          <div className="table-responsive text-center">
+          <div className="table-bordered table-responsive text-center">
             <Table responsive>
               <tbody>
                 {response?.top?.map((value, i, array) => {
                   if (i % 2) {
                     return (
-                      <tr key={`entity-${i}`} data-cy="entityTable">
+                      <tr key={`entities-${i}`} data-cy="entityTable">
                         <td>
                           <Button
                             onMouseEnter={() => handlePrefetch(array[i].id)}
@@ -84,7 +84,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
                         <td>
                           <Button
-                            onMouseEnter={() => handlePrefetch(array[i - 1].id)}
+                            onMouseEnter={() => handlePrefetch(array[i + 1].id)}
                             tag={Link}
                             to={`${match.url}/${array[i - 1].id}`}
                             color="link"

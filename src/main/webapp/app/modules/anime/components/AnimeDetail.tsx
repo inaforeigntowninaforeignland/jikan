@@ -1,36 +1,64 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Progress } from 'reactstrap';
+import { Button, Row, Col, Progress, CardGroup, Card, CardImg } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useFetchAnimeById } from '../hooks/useFetchAnimeById';
+import { useFetchAnimePicturesById } from '../hooks/useFetchAnimePicturesById';
 
 export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
-  const { data: response, isLoading, isRefetching, isError, error } = useFetchAnimeById(match.params.id);
+  const {
+    data: animeDetail,
+    isLoading: isLoadingAnimeDetail,
+    isError: isErrorAnimeDetail,
+    error: errorAnimeDetail,
+  } = useFetchAnimeById(match.params.id);
+
+  const { data: animePicturesContainer, isLoading: isLoadingAnimePicturesContainer } = useFetchAnimePicturesById(match.params.id);
 
   return (
     <Row>
       <Col md="8">
-        {isLoading || isRefetching ? (
+        {isLoadingAnimePicturesContainer || isLoadingAnimeDetail ? (
           <Progress animated color="info" value="100" />
-        ) : isError ? (
-          <div className="alert alert-danger">{`${error} :(`}</div>
+        ) : isErrorAnimeDetail ? (
+          <div className="alert alert-danger">{`${errorAnimeDetail} :(`}</div>
         ) : (
           ''
         )}
 
         <div>
-          <h2 data-cy="topDetailsHeading">{response?.title}</h2>
+          <h1 data-cy="topDetailsHeading">{animeDetail?.title}</h1>
 
           <dl className="jh-entity-details">
             <dt>
-              <span id="title">Description:</span>
+              <h5 id="description">Description:</h5>
             </dt>
 
-            <dd>{response?.synopsis ?? 'Empty :('}</dd>
+            <dd>{animeDetail?.synopsis ?? 'Empty :('} </dd>
+
+            {animePicturesContainer?.pictures?.length > 0 && !isErrorAnimeDetail ? (
+              <>
+                <dt>
+                  <h5 id="pictures">Pictures:</h5>
+                </dt>
+
+                <dd>
+                  <CardGroup>
+                    {animePicturesContainer?.pictures?.map((picture, i) => (
+                      <Card key={`picture-${i}`}>
+                        <CardImg alt={picture?.small} src={picture?.small} width="100%" />
+                      </Card>
+                    ))}
+                  </CardGroup>
+                </dd>
+              </>
+            ) : (
+              ''
+            )}
           </dl>
         </div>
 
