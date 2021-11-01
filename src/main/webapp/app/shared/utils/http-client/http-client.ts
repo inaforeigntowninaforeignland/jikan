@@ -17,5 +17,6 @@ export const axiosInstance = axios.create({
 export async function request<T extends IBaseResponse>(axiosRequestConfig: AxiosRequestConfig, Model: ClassConstructor<T>) {
   const { data } = await axiosInstance.request<T>(axiosRequestConfig);
 
+  // return plainToClass<T, AxiosResponse['data']>(Model, data, { excludeExtraneousValues: true });
   return plainToClass<T, AxiosResponse['data']>(Model, data);
 }

@@ -10,9 +10,9 @@ import AnimeImpl from '../models/impl/anime-impl';
 export default Object.freeze({
   /**
    * Get anime by id
-   * @param id {number} Anime id
+   * @param id {number | string} Anime id
    */
-  getAnimeById(id: number) {
+  getAnimeById(id: number | string) {
     return request<IAnime>(
       {
         method: RequestType.GET,

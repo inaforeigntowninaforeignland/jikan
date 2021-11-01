@@ -4,21 +4,35 @@ import { Button, Row, Col } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { useFetchAnimeById } from '../hooks/use-fetch-anime-by-id';
+
 export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
+
+  const { data: response, isLoading } = useFetchAnimeById(match.params.id);
 
   return (
     <Row>
       <Col md="8">
         <h2 data-cy="topDetailsHeading">Anime</h2>
 
-        <dl className="jh-entity-details">
-          <dt>
-            <span id="id">ID</span>
-          </dt>
+        {isLoading ? (
+          <div className="alert alert-info">Loading...</div>
+        ) : (
+          <dl className="jh-entity-details">
+            <dt>
+              <span id="title">Title:</span>
+            </dt>
 
-          <dd>{match.params.id}</dd>
-        </dl>
+            <dd>{response?.title}</dd>
+
+            <dt>
+              <span id="title">Description:</span>
+            </dt>
+
+            <dd>{response?.synopsis}</dd>
+          </dl>
+        )}
 
         <Button tag={Link} to="/top" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />
