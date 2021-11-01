@@ -1,8 +1,8 @@
 import RequestType from 'app/shared/utils/http-client/enums/request-type';
 import { request } from 'app/shared/utils/http-client';
 
-import IAnime from '../models/anime';
-import AnimeImpl from '../models/impl/anime-impl';
+import IAnime from '../models/IAnime';
+import AnimeImpl from '../models/impl/AnimeImpl';
 
 /**
  * @see {@link https://jikan.docs.apiary.io/#reference/0/anime}

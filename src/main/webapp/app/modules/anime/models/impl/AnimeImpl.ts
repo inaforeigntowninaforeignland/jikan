@@ -1,8 +1,8 @@
 import { Expose } from 'class-transformer';
 
-import AbstractBaseResponse from 'app/models/impl/abstract-base-response';
+import AbstractBaseResponse from 'app/models/impl/AbstractBaseResponse';
 
-import IAnime from '../anime';
+import IAnime from '../IAnime';
 
 class AnimeImpl extends AbstractBaseResponse implements IAnime {
   @Expose({ name: 'mal_id' })

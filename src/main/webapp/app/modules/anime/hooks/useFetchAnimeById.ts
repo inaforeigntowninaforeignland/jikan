@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import animeService from '../services/anime-service';
+import animeService from '../services/anime.service';
 
 /**
  * Fetch anime by id

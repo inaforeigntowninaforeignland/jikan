@@ -34,7 +34,7 @@ import { faWrench } from '@fortawesome/free-solid-svg-icons/faWrench';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-export const loadIcons = () => {
+export const setupIcons = () => {
   library.add(
     faArrowLeft,
     faAsterisk,

@@ -1,6 +1,6 @@
-import AbstractTopDetail from 'app/modules/top/models/base/impl/abstract-top-detail';
+import AbstractTopDetail from 'app/modules/top/models/base/impl/AbstractTopDetail';
 
-import ITopAnimeDetail from '../top-anime-detail';
+import ITopAnimeDetail from '../ITopAnimeDetail';
 
 class TopAnimeDetailImpl extends AbstractTopDetail implements ITopAnimeDetail {
   episodes: number;

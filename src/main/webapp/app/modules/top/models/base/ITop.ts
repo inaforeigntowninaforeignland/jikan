@@ -1,6 +1,6 @@
-import IBaseResponse from 'app/models/base-response';
+import IBaseResponse from 'app/models/IBaseResponse';
 
-import ITopDetail from './top-detail';
+import ITopDetail from './ITopDetail';
 
 // TODO Add JSDoc
 interface ITop<T extends ITopDetail> extends IBaseResponse {

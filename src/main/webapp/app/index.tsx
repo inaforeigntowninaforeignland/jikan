@@ -7,10 +7,10 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import ErrorBoundary from './shared/error/error-boundary';
 import { queryClient } from './shared/utils/query-client';
-import { loadIcons } from './config/icon-loader';
+import { setupIcons } from './config/icons';
 import AppComponent from './app';
 
-loadIcons();
+setupIcons();
 
 const rootEl = document.getElementById('root');
 

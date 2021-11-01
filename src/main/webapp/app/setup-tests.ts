@@ -1,3 +1,3 @@
-import { loadIcons } from './config/icon-loader';
+import { setupIcons } from './config/icons';
 
-loadIcons();
+setupIcons();

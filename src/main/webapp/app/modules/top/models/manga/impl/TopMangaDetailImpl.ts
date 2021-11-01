@@ -1,6 +1,6 @@
-import AbstractTopDetail from 'app/modules/top/models/base/impl/abstract-top-detail';
+import AbstractTopDetail from 'app/modules/top/models/base/impl/AbstractTopDetail';
 
-import ITopMangaDetail from '../top-manga-detail';
+import ITopMangaDetail from '../ITopMangaDetail';
 
 class TopMangaDetailImpl extends AbstractTopDetail implements ITopMangaDetail {
   volumes: number;

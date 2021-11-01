@@ -4,7 +4,7 @@ import { Button, Row, Col } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useFetchAnimeById } from '../hooks/use-fetch-anime-by-id';
+import { useFetchAnimeById } from '../hooks/useFetchAnimeById';
 
 export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;

@@ -1,4 +1,4 @@
-import IBaseResponse from 'app/models/base-response';
+import IBaseResponse from 'app/models/IBaseResponse';
 
 // TODO Add JSDoc Describe other fields
 interface IAnime extends IBaseResponse {

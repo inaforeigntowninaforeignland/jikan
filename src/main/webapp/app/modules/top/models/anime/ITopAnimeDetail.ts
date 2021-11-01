@@ -1,4 +1,4 @@
-import ITopDetail from '../base/top-detail';
+import ITopDetail from '../base/ITopDetail';
 
 // TODO Add JSDoc
 interface ITopAnimeDetail extends ITopDetail {

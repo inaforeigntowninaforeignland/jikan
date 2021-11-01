@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Row, Table } from 'reactstrap';
+import { JhiItemCount, JhiPagination } from 'react-jhipster';
+
+import { ITEMS_PER_PAGE } from 'app/config/constants';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useFetchTopAnime } from '../hooks/use-fetch-top-anime';
-import AnimeSubtypeType from '../enums/anime-subtype-type';
+import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
+import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 
 export const TopList = (props: RouteComponentProps<{ url: string }>) => {
-  const { data: response, isLoading } = useFetchTopAnime(1, AnimeSubtypeType.OVA);
+  const { data: response, isLoading } = useFetchTopAnime(AnimeSubtypeType.UPCOMING);
 
   const handleSyncList = () => {};
+
+  const handlePagination = () => {};
 
   const { match } = props;
 
@@ -54,6 +59,26 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
           !isLoading && <div className="alert alert-warning">Nothing found</div>
         )}
       </div>
+
+      {response?.contentLength ? (
+        <div className={response?.top?.length > 0 ? '' : 'd-none'}>
+          <Row className="justify-content-center">
+            <JhiItemCount page={1} total={response?.contentLength} itemsPerPage={ITEMS_PER_PAGE} />
+          </Row>
+
+          <Row className="justify-content-center">
+            <JhiPagination
+              activePage={1}
+              onSelect={handlePagination}
+              maxButtons={5}
+              itemsPerPage={ITEMS_PER_PAGE}
+              totalItems={response?.contentLength}
+            />
+          </Row>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

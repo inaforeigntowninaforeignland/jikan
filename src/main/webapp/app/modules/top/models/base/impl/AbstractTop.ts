@@ -1,9 +1,9 @@
 import { Type } from 'class-transformer';
 
-import AbstractBaseResponse from 'app/models/impl/abstract-base-response';
+import AbstractBaseResponse from 'app/models/impl/AbstractBaseResponse';
 
-import ITopDetail from '../top-detail';
-import ITop from '../top';
+import ITopDetail from '../ITopDetail';
+import ITop from '../ITop';
 
 abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse implements ITop<T> {
   /**

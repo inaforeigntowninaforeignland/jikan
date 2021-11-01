@@ -3,9 +3,9 @@ import { Switch } from 'react-router-dom';
 
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
-import AnimeDetail from '../anime/components/anime-detail';
+import AnimeDetail from '../anime/components/AnimeDetail';
 
-import TopList from './components/top-list';
+import TopList from './components/TopList';
 
 const Routes = ({ match }) => (
   <>

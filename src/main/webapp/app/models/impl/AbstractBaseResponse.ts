@@ -1,6 +1,6 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
-import IBaseResponse from '../base-response';
+import IBaseResponse from '../IBaseResponse';
 
 abstract class AbstractBaseResponse implements IBaseResponse {
   @Expose({ name: 'request_cache_expiry' })
@@ -11,6 +11,9 @@ abstract class AbstractBaseResponse implements IBaseResponse {
 
   @Expose({ name: 'request_hash' })
   requestHash: string;
+
+  @Type(() => Number)
+  contentLength: number;
 }
 
 export default AbstractBaseResponse;

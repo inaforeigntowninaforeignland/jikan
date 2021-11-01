@@ -5,6 +5,11 @@ interface IBaseResponse {
   requestCached: boolean;
 
   requestHash: string;
+
+  /**
+   * Total items
+   */
+  contentLength: number;
 }
 
 export default IBaseResponse;
