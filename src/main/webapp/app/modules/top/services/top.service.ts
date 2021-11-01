@@ -1,6 +1,8 @@
 import RequestType from 'app/shared/utils/http-client/enums/request-type';
 import { request } from 'app/shared/utils/http-client';
 
+import { START_PAGE } from 'app/config/constants';
+
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import MangaSubtypeType from '../enums/MangaSubtypeType';
 import BothSubtypeType from '../enums/BothSubtypeType';
@@ -20,7 +22,7 @@ export default Object.freeze({
    * @param page {number} Page
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Anime subtype
    */
-  getTopAnime(subtype?: AnimeSubtypeType | BothSubtypeType, page = 0) {
+  getTopAnime(subtype?: AnimeSubtypeType | BothSubtypeType, page = START_PAGE) {
     return request<ITop<ITopAnimeDetail>>(
       {
         method: RequestType.GET,
@@ -35,7 +37,7 @@ export default Object.freeze({
    * @param page {number} Page
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Manga subtype
    */
-  getTopManga(subtype?: MangaSubtypeType | BothSubtypeType, page = 0) {
+  getTopManga(subtype?: MangaSubtypeType | BothSubtypeType, page = START_PAGE) {
     return request<ITop<ITopMangaDetail>>(
       {
         method: RequestType.GET,
