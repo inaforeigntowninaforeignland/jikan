@@ -4,7 +4,7 @@ import { ClassConstructor } from 'class-transformer/types/interfaces';
 
 import { SERVER_API_URL, SERVER_TIMEOUT } from 'app/config/constants';
 import { setupAxiosInterceptors } from 'app/config/interceptors';
-import IBaseResponse from 'app/models/IBaseResponse';
+import IBaseResponse from 'app/models/base/IBaseResponse';
 
 const axiosInstance = axios.create({
   baseURL: `${SERVER_API_URL}v3/`,

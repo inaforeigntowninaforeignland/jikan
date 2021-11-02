@@ -1,3 +1,6 @@
+/**
+ * Base response model
+ */
 // TODO Add JSDoc
 interface IBaseResponse {
   requestCacheExpiry: number;

@@ -1,8 +1,8 @@
 import RequestType from 'app/shared/utils/http-client/enums/request-type';
 import { request } from 'app/shared/utils/http-client';
 
-import PicturesContainerImpl from 'app/models/impl/PicturesContainerImpl';
-import IPicturesContainer from 'app/models/IPicturesContainer';
+import PicturesContainerImpl from 'app/models/picture/impl/PicturesContainerImpl';
+import IPicturesContainer from 'app/models/picture/IPicturesContainer';
 
 import IAnime from '../models/IAnime';
 import AnimeImpl from '../models/impl/AnimeImpl';

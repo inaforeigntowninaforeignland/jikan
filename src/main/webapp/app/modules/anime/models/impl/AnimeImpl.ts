@@ -1,6 +1,10 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
-import AbstractBaseResponse from 'app/models/impl/AbstractBaseResponse';
+import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
+import RelatedSubTypeImpl from 'app/models/base/impl/RelatedSubTypeImpl';
+import IRelatedSubType from 'app/models/base/IRelatedSubType';
+import PeriodImpl from 'app/models/period/impl/PeriodImpl';
+import IPeriod from 'app/models/period/IPeriod';
 
 import IAnime from '../IAnime';
 
@@ -28,6 +32,12 @@ class AnimeImpl extends AbstractBaseResponse implements IAnime {
   synopsis: string;
 
   score: number;
+
+  @Type(() => RelatedSubTypeImpl)
+  producers: IRelatedSubType[];
+
+  @Type(() => PeriodImpl)
+  aired: IPeriod;
 }
 
 export default AnimeImpl;

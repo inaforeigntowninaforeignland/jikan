@@ -1,4 +1,4 @@
-import IBaseResponse from 'app/models/IBaseResponse';
+import IBaseResponse from 'app/models/base/IBaseResponse';
 
 import ITopDetail from './ITopDetail';
 

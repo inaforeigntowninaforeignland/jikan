@@ -1,10 +1,10 @@
 import { Type } from 'class-transformer';
 
+import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
+
 import IPictureDetail from '../IPictureDetail';
 import PictureDetailImpl from '../impl/PictureDetailImpl';
 import IPicturesContainer from '../IPicturesContainer';
-
-import AbstractBaseResponse from './AbstractBaseResponse';
 
 class PicturesContainerImpl extends AbstractBaseResponse implements IPicturesContainer {
   @Type(() => PictureDetailImpl)

@@ -1,4 +1,5 @@
-import IBaseResponse from './IBaseResponse';
+import IBaseResponse from 'app/models/base/IBaseResponse';
+
 import IPictureDetail from './IPictureDetail';
 
 /**

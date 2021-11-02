@@ -1,4 +1,6 @@
-import IBaseResponse from 'app/models/IBaseResponse';
+import IBaseResponse from 'app/models/base/IBaseResponse';
+import IRelatedSubType from 'app/models/base/IRelatedSubType';
+import IPeriod from 'app/models/period/IPeriod';
 
 // TODO Add JSDoc Describe other fields
 interface IAnime extends IBaseResponse {
@@ -22,6 +24,13 @@ interface IAnime extends IBaseResponse {
   synopsis: string;
 
   score: number;
+
+  producers: IRelatedSubType[];
+
+  /**
+   * Period
+   */
+  aired: IPeriod;
 }
 
 export default IAnime;

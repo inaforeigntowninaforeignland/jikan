@@ -1,15 +1,13 @@
 import { toast } from 'react-toastify';
 
 export const setupAxiosInterceptors = axiosInstance => {
-  const onResponseSuccess = response => {
-    return {
-      ...response,
-      data: {
-        ...response.data,
-        contentLength: response.headers['content-length'],
-      },
-    };
-  };
+  const onResponseSuccess = response => ({
+    ...response,
+    data: {
+      ...response.data,
+      contentLength: response.headers['content-length'],
+    },
+  });
 
   const onResponseError = error => {
     toast.error(`${error.message}`, {

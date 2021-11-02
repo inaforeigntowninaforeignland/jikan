@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 
-import AbstractBaseResponse from 'app/models/impl/AbstractBaseResponse';
+import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
 
 import ITopDetail from '../ITopDetail';
 import ITop from '../ITop';
