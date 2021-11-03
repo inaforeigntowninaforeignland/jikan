@@ -1,9 +1,9 @@
 import IBaseResponse from 'app/models/base/IBaseResponse';
 
-import ITopDetail from './ITopDetail';
+import IBaseTopDetail from './IBaseTopDetail';
 
 // TODO Add JSDoc
-interface ITop<T extends ITopDetail> extends IBaseResponse {
+interface IBaseTop<T extends IBaseTopDetail> extends IBaseResponse {
   /**
    * @see {@link https://github.com/typestack/class-transformer#working-with-generics}
    */
@@ -13,4 +13,4 @@ interface ITop<T extends ITopDetail> extends IBaseResponse {
   top: T[];
 }
 
-export default ITop;
+export default IBaseTop;

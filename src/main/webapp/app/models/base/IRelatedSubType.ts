@@ -1,11 +1,8 @@
-interface IRelatedSubType {
-  id: number;
-
+// TODO Add JSDoc
+interface IRelatedSubType extends IBaseModel {
   type: string;
 
   name: string;
-
-  url: string;
 }
 
 export default IRelatedSubType;

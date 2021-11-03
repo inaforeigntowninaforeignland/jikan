@@ -1,15 +1,8 @@
 // TODO Add JSDoc
-interface ITopDetail {
-  /**
-   * ID
-   */
-  id: number;
-
+interface IBaseTopDetail extends IBaseModel {
   rank: number;
 
   title: string;
-
-  url: string;
 
   imageUrl: string;
 
@@ -24,4 +17,4 @@ interface ITopDetail {
   score: number;
 }
 
-export default ITopDetail;
+export default IBaseTopDetail;

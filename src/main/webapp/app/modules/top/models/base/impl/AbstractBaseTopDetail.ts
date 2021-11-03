@@ -1,16 +1,13 @@
 import { Expose, Type } from 'class-transformer';
 
-import ITopDetail from '../ITopDetail';
+import AbstractBaseModel from 'app/models/base/impl/AbstractBaseModel';
 
-abstract class AbstractTopDetail implements ITopDetail {
+import IBaseTopDetail from '../IBaseTopDetail';
+
+abstract class AbstractBaseTopDetail extends AbstractBaseModel implements IBaseTopDetail {
   rank: number;
 
-  @Expose({ name: 'mal_id' })
-  id: number;
-
   title: string;
-
-  url: string;
 
   @Expose({ name: 'image_url' })
   imageUrl: string;
@@ -30,4 +27,4 @@ abstract class AbstractTopDetail implements ITopDetail {
   score: number;
 }
 
-export default AbstractTopDetail;
+export default AbstractBaseTopDetail;

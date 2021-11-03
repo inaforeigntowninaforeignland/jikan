@@ -1,7 +1,7 @@
-import ITopDetail from '../base/ITopDetail';
+import IBaseTopDetail from '../base/IBaseTopDetail';
 
 // TODO Add JSDoc
-interface ITopMangaDetail extends ITopDetail {
+interface ITopMangaDetail extends IBaseTopDetail {
   volumes: number;
 }
 

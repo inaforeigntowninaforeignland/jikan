@@ -2,10 +2,10 @@ import { Type } from 'class-transformer';
 
 import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
 
-import ITopDetail from '../ITopDetail';
-import ITop from '../ITop';
+import IBaseTopDetail from '../IBaseTopDetail';
+import IBaseTop from '../IBaseTop';
 
-abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse implements ITop<T> {
+abstract class AbstractBaseTop<T extends IBaseTopDetail> extends AbstractBaseResponse implements IBaseTop<T> {
   /**
    * @see {@link https://github.com/typestack/class-transformer#working-with-generics}
    */
@@ -13,7 +13,7 @@ abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse im
   type: Function;
 
   @Type(options => {
-    return (options?.newObject as AbstractTop<T>).type;
+    return (options?.newObject as AbstractBaseTop<T>).type;
   })
   top: T[];
 
@@ -25,4 +25,4 @@ abstract class AbstractTop<T extends ITopDetail> extends AbstractBaseResponse im
   }
 }
 
-export default AbstractTop;
+export default AbstractBaseTop;

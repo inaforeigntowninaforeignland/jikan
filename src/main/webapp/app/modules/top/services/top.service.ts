@@ -11,7 +11,7 @@ import TopAnimeImpl from '../models/anime/impl/TopAnimeImpl';
 import TopMangaImpl from '../models/manga/impl/TopMangaImpl';
 import ITopMangaDetail from '../models/manga/ITopMangaDetail';
 import ITopAnimeDetail from '../models/anime/ITopAnimeDetail';
-import ITop from '../models/base/ITop';
+import IBaseTop from '../models/base/IBaseTop';
 
 /**
  * @see {@link https://jikan.docs.apiary.io/#reference/0/top}
@@ -23,7 +23,7 @@ export default Object.freeze({
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Anime subtype
    */
   getTopAnime(subtype?: AnimeSubtypeType | BothSubtypeType, page = START_PAGE) {
-    return request<ITop<ITopAnimeDetail>>(
+    return request<IBaseTop<ITopAnimeDetail>>(
       {
         method: RequestType.GET,
         url: `/top/${TopType.ANIME}/${page}/${subtype}`,
@@ -38,7 +38,7 @@ export default Object.freeze({
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Manga subtype
    */
   getTopManga(subtype?: MangaSubtypeType | BothSubtypeType, page = START_PAGE) {
-    return request<ITop<ITopMangaDetail>>(
+    return request<IBaseTop<ITopMangaDetail>>(
       {
         method: RequestType.GET,
         url: `/top/${TopType.MANGA}/${page}/${subtype}`,

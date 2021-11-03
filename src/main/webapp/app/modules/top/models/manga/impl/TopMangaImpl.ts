@@ -1,9 +1,9 @@
-import AbstractTop from 'app/modules/top/models/base/impl/AbstractTop';
+import AbstractBaseTop from 'app/modules/top/models/base/impl/AbstractBaseTop';
 
 import TopMangaDetailImpl from '../impl/TopMangaDetailImpl';
 import ITopMangaDetail from '../ITopMangaDetail';
 
-class TopMangaImpl extends AbstractTop<ITopMangaDetail> {
+class TopMangaImpl extends AbstractBaseTop<ITopMangaDetail> {
   constructor() {
     super(TopMangaDetailImpl);
   }

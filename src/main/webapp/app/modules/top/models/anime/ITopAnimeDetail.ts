@@ -1,7 +1,7 @@
-import ITopDetail from '../base/ITopDetail';
+import IBaseTopDetail from '../base/IBaseTopDetail';
 
 // TODO Add JSDoc
-interface ITopAnimeDetail extends ITopDetail {
+interface ITopAnimeDetail extends IBaseTopDetail {
   episodes: number;
 }
 
