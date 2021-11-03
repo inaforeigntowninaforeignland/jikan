@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge').merge;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const sass = require('sass');
 
@@ -95,6 +96,7 @@ module.exports = options =>
         }
       ),
       new webpack.HotModuleReplacementPlugin(),
+      new BundleAnalyzerPlugin(),
       new WebpackNotifierPlugin({
         title: 'Jikan',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
