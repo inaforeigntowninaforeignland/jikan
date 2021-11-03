@@ -4,15 +4,16 @@ import ExposePropertyType from 'app/enums/ExposePropertyType';
 
 import AbstractBaseModel from 'app/models/base/impl/AbstractBaseModel';
 
-import IVoiceActor from '../IVoiceActor';
+import IStaff from '../IStaff';
+import PositionType from '../enums/PositionType';
 
-class VoiceActorImpl extends AbstractBaseModel implements IVoiceActor {
+class StaffImpl extends AbstractBaseModel implements IStaff {
   @Expose({ name: ExposePropertyType.IMAGE_URL })
   imageUrl: string;
 
-  language: string;
+  positions: PositionType[];
 
   name: string;
 }
 
-export default VoiceActorImpl;
+export default StaffImpl;

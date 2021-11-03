@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Progress, CardGroup, Card, CardImg } from 'reactstrap';
+import { Button, Row, Col, Progress, UncontrolledCarousel } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -40,6 +40,18 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
 
             <dd>{animeDetail?.synopsis ?? 'Empty :('} </dd>
 
+            <dt>
+              <h5 id="period">Period:</h5>
+            </dt>
+
+            <dd>{animeDetail?.aired?.period ?? 'Empty :('} </dd>
+
+            <dt>
+              <h5 id="period">Producers:</h5>
+            </dt>
+
+            <dd>{animeDetail?.producers?.length > 0 ? animeDetail?.producers?.map(({ name }) => name).join(',') : 'Empty :('} </dd>
+
             {animePicturesContainer?.pictures?.length > 0 && !isErrorAnimeDetail ? (
               <>
                 <dt>
@@ -47,13 +59,14 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
                 </dt>
 
                 <dd>
-                  <CardGroup>
-                    {animePicturesContainer?.pictures?.map((picture, i) => (
-                      <Card key={`picture-${i}`}>
-                        <CardImg alt={picture?.small} src={picture?.small} width="100%" />
-                      </Card>
-                    ))}
-                  </CardGroup>
+                  <UncontrolledCarousel
+                    items={animePicturesContainer?.pictures?.map((picture, i) => ({
+                      caption: `#${i + 1}`,
+                      altText: picture?.small,
+                      key: i,
+                      src: picture?.small,
+                    }))}
+                  />
                 </dd>
               </>
             ) : (

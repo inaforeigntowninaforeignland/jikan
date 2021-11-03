@@ -1,5 +1,7 @@
 import { Expose, Type } from 'class-transformer';
 
+import ExposePropertyType from 'app/enums/ExposePropertyType';
+
 import IPeriod from '../IPeriod';
 import IPeriodPropContainer from '../IPeriodPropContainer';
 
@@ -15,7 +17,7 @@ class PeriodImpl implements IPeriod {
   @Type(() => PeriodPropContainerImpl)
   prop: IPeriodPropContainer;
 
-  @Expose({ name: 'string' })
+  @Expose({ name: ExposePropertyType.STRING })
   period: string;
 }
 

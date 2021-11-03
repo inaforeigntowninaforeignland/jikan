@@ -1,7 +1,9 @@
 import { Expose } from 'class-transformer';
 
+import ExposePropertyType from 'app/enums/ExposePropertyType';
+
 class AbstractBaseModel implements IBaseModel {
-  @Expose({ name: 'mal_id' })
+  @Expose({ name: ExposePropertyType.MAL_ID })
   id: number;
 
   url: string;
