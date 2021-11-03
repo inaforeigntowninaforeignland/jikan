@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Row, Col, Progress, CardGroup, Card, CardImg } from 'reactstrap';
+import { Progress, CardGroup, Card, CardImg } from 'reactstrap';
 
 import { useFetchAnimePicturesById } from '../hooks/useFetchAnimePicturesById';
 
@@ -22,7 +22,7 @@ export const AnimeDetailPictures = (props: RouteComponentProps<{ id: string }>) 
       ))}
     </CardGroup>
   ) : (
-    'Empty :('
+    <div className="alert alert-info">{`Empty :(`}</div>
   );
 };
 

@@ -5,10 +5,10 @@ import ReactDOM from 'react-dom';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-import ErrorBoundary from './shared/error/error-boundary';
+import ErrorBoundary from './shared/error/components/ErrorBoundary';
 import { queryClient } from './shared/utils/query-client';
 import { setupIcons } from './config/icons';
-import AppComponent from './app';
+import AppComponent from './App';
 
 setupIcons();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-import PageNotFound from 'app/shared/error/page-not-found';
+import PageNotFound from 'app/shared/error/components/PageNotFound';
 
 import Modules from 'app/modules';
 

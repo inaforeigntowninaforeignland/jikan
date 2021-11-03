@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { ClassConstructor } from 'class-transformer/types/interfaces';
 
@@ -19,7 +20,14 @@ setupAxiosInterceptors(axiosInstance);
 
 export async function request<T extends IBaseResponse>(axiosRequestConfig: AxiosRequestConfig, Model: ClassConstructor<T>) {
   const { data } = await axiosInstance.request<T>(axiosRequestConfig);
+  const plainToClassData = plainToClass<T, AxiosResponse['data']>(Model, data);
 
-  // return plainToClass<T, AxiosResponse['data']>(Model, data, { excludeExtraneousValues: true });
-  return plainToClass<T, AxiosResponse['data']>(Model, data);
+  validate(plainToClassData).then(validationErrors => {
+    if (process.env.NODE_ENV === 'development' && validationErrors.length > 0) {
+      // eslint-disable-next-line no-console
+      console.log('Validation errors: ', validationErrors);
+    }
+  });
+
+  return plainToClassData;
 }

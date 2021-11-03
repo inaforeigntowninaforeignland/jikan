@@ -6,11 +6,11 @@ import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import MangaSubtypeType from '../enums/MangaSubtypeType';
 import BothSubtypeType from '../enums/BothSubtypeType';
 import TopType from '../enums/TopType';
-import TopAnimeImpl from '../models/anime/impl/TopAnimeImpl';
-import TopMangaImpl from '../models/manga/impl/TopMangaImpl';
+import TopAnimeContainerImpl from '../models/anime/impl/TopAnimeContainerImpl';
+import TopMangaContainerImpl from '../models/manga/impl/TopMangaContainerImpl';
 import ITopMangaDetail from '../models/manga/ITopMangaDetail';
 import ITopAnimeDetail from '../models/anime/ITopAnimeDetail';
-import IBaseTop from '../models/base/IBaseTop';
+import IBaseTopContainer from '../models/base/IBaseTopContainer';
 
 /**
  * @see {@link https://jikan.docs.apiary.io/#reference/0/top}
@@ -22,12 +22,12 @@ export default Object.freeze({
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Anime subtype
    */
   getTopAnime(subtype?: AnimeSubtypeType | BothSubtypeType, page = START_PAGE) {
-    return request<IBaseTop<ITopAnimeDetail>>(
+    return request<IBaseTopContainer<ITopAnimeDetail>>(
       {
         method: HTTPRequestType.GET,
         url: `/top/${TopType.ANIME}/${page}/${subtype}`,
       },
-      TopAnimeImpl
+      TopAnimeContainerImpl
     );
   },
 
@@ -37,12 +37,12 @@ export default Object.freeze({
    * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Manga subtype
    */
   getTopManga(subtype?: MangaSubtypeType | BothSubtypeType, page = START_PAGE) {
-    return request<IBaseTop<ITopMangaDetail>>(
+    return request<IBaseTopContainer<ITopMangaDetail>>(
       {
         method: HTTPRequestType.GET,
         url: `/top/${TopType.MANGA}/${page}/${subtype}`,
       },
-      TopMangaImpl
+      TopMangaContainerImpl
     );
   },
 });

@@ -6,10 +6,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { hot } from 'react-hot-loader';
 
-import Header from 'app/shared/layout/header/header';
-import Footer from 'app/shared/layout/footer/footer';
+import Header from 'app/shared/layout/header/Header';
+import Footer from 'app/shared/layout/footer/Footer';
 
-import ErrorBoundary from 'app/shared/error/error-boundary';
+import ErrorBoundary from 'app/shared/error/components/ErrorBoundary';
 
 import AppRoutes from 'app/routes';
 

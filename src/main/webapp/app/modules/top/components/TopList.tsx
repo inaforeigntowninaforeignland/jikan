@@ -1,50 +1,78 @@
-import { useQueryClient } from 'react-query';
+// import { useQueryClient } from 'react-query';
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Progress, Row, Table } from 'reactstrap';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Progress, Row, Table } from 'reactstrap';
 import { JhiItemCount, JhiPagination } from 'react-jhipster';
 
-import animeService from 'app/modules/anime/services/anime.service';
+// import animeService from 'app/modules/anime/services/anime.service';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import useTopStore from '../store/top.store';
-import { TOP_ITEMS_PER_PAGE } from '../helpers/constants';
+import { TOP_ITEMS_PER_PAGE, MAX_PAGINATION_BUTTONS } from '../helpers/constants';
 
 export const TopList = (props: RouteComponentProps<{ url: string }>) => {
   const { match } = props;
 
-  const queryClient = useQueryClient();
-
   const activePage = useTopStore(state => state.activePage);
+
+  const activeSubtype = useTopStore(state => state.activeSubtype);
+
+  const isOpenSubtypeDropDown = useTopStore(state => state.isOpenSubtypeDropDown);
 
   const setActivePage = useTopStore(state => state.setActivePage);
 
-  const { data: response, isLoading, isRefetching, isError, error, refetch } = useFetchTopAnime(AnimeSubtypeType.UPCOMING, activePage);
+  const setActiveSubtype = useTopStore(state => state.setActiveSubtype);
 
-  const handlePrefetch = id => {
-    queryClient.prefetchQuery(['anime', id], () => animeService.getAnimeById(id));
-  };
+  const toggleSubtypeDropDown = useTopStore(state => state.toggleSubtypeDropDown);
+
+  const { data: response, isLoading, isRefetching, isError, error, refetch } = useFetchTopAnime(activeSubtype, activePage);
+
+  // const queryClient = useQueryClient();
+  //
+  // const handlePrefetch = id => {
+  //   queryClient.prefetchQuery(['anime', id], () => animeService.getAnimeById(id));
+  // };
 
   const handleSyncList = () => {
     refetch();
-  };
-
-  const handleActivePage = currentPage => {
-    setActivePage(currentPage);
   };
 
   useEffect(() => {
     refetch();
   }, [activePage]);
 
+  useEffect(() => {
+    refetch();
+  }, [activeSubtype]);
+
   return (
     <>
       <h2 id="top-list-heading" data-cy="TopListHeading">
         Top Anime
         <div className="d-flex justify-content-end">
+          <Dropdown isOpen={isOpenSubtypeDropDown} toggle={() => toggleSubtypeDropDown(isOpenSubtypeDropDown)}>
+            <DropdownToggle color="primary" caret className="dropdown-toggle text-capitalize">
+              {activeSubtype}
+            </DropdownToggle>
+
+            <DropdownMenu className="currency-dropdown">
+              {Object.keys(AnimeSubtypeType).map(key => {
+                return (
+                  <DropdownItem
+                    key={`subtype-${key}`}
+                    onClick={() => setActiveSubtype(AnimeSubtypeType[key])}
+                    className={`text-capitalize ${activeSubtype === AnimeSubtypeType[key] ? 'active' : ''}`}
+                  >
+                    {AnimeSubtypeType[key]}
+                  </DropdownItem>
+                );
+              })}
+            </DropdownMenu>
+          </Dropdown>
+
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={isLoading || isRefetching}>
             <FontAwesomeIcon icon="sync" spin={isLoading || isRefetching} /> Refresh List
           </Button>
@@ -71,25 +99,13 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
                     return (
                       <tr key={`top-list-${i}`} data-cy="topListTable">
                         <td>
-                          <Button
-                            onMouseEnter={() => handlePrefetch(array[i].id)}
-                            tag={Link}
-                            to={`${match.url}/${array[i].id}`}
-                            color="link"
-                            size="sm"
-                          >
+                          <Button tag={Link} to={`${match.url}/${array[i].id}`} color="link" size="sm">
                             {array[i].title}
                           </Button>
                         </td>
 
                         <td>
-                          <Button
-                            onMouseEnter={() => handlePrefetch(array[i + 1].id)}
-                            tag={Link}
-                            to={`${match.url}/${array[i - 1].id}`}
-                            color="link"
-                            size="sm"
-                          >
+                          <Button tag={Link} to={`${match.url}/${array[i - 1].id}`} color="link" size="sm">
                             {array[i - 1].title}
                           </Button>
                         </td>
@@ -109,8 +125,8 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
             <Row className="justify-content-center">
               <JhiPagination
                 activePage={activePage}
-                onSelect={handleActivePage}
-                maxButtons={5}
+                onSelect={setActivePage}
+                maxButtons={MAX_PAGINATION_BUTTONS}
                 itemsPerPage={TOP_ITEMS_PER_PAGE}
                 totalItems={response?.contentLength}
               />
