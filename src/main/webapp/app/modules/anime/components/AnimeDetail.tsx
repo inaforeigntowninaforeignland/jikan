@@ -1,87 +1,77 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Progress, UncontrolledCarousel } from 'reactstrap';
+import { Nav, NavLink, NavItem, TabPane, TabContent, Button } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useFetchAnimeById } from '../hooks/useFetchAnimeById';
-import { useFetchAnimePicturesById } from '../hooks/useFetchAnimePicturesById';
+import useAnimeStore from '../store/anime.store';
+import { ANIME_DETAIL_TAB } from '../helpers/constants';
+import AnimeDetailPictures from '../components/AnimeDetailPictures';
+import AnimeDetailDescription from '../components/AnimeDetailDescription';
+import AnimeDetailCharacters from '../components/AnimeDetailCharacters';
 
 export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
-  const { match } = props;
+  const activeTab = useAnimeStore(state => state.activeTab);
 
-  const {
-    data: animeDetail,
-    isLoading: isLoadingAnimeDetail,
-    isError: isErrorAnimeDetail,
-    error: errorAnimeDetail,
-  } = useFetchAnimeById(match.params.id);
+  const setActiveTab = useAnimeStore(state => state.setActiveTab);
 
-  const { data: animePicturesContainer, isLoading: isLoadingAnimePicturesContainer } = useFetchAnimePicturesById(match.params.id);
+  const handleActiveTab = currentTab => {
+    setActiveTab(currentTab);
+  };
 
   return (
-    <Row>
-      <Col md="8">
-        {isLoadingAnimePicturesContainer || isLoadingAnimeDetail ? (
-          <Progress animated color="info" value="100" />
-        ) : isErrorAnimeDetail ? (
-          <div className="alert alert-danger">{`${errorAnimeDetail} :(`}</div>
-        ) : (
-          ''
-        )}
+    <>
+      <Nav tabs>
+        <NavItem>
+          <Button tag={Link} to="/top" replace color="info" data-cy="animeDetailBackButton">
+            <FontAwesomeIcon icon="arrow-left" />
 
-        <div>
-          <h1 data-cy="topDetailsHeading">{animeDetail?.title}</h1>
+            <span className="d-none d-md-inline">Back</span>
+          </Button>
+        </NavItem>
 
-          <dl className="jh-entity-details">
-            <dt>
-              <h5 id="description">Description:</h5>
-            </dt>
+        <NavItem>
+          <NavLink
+            className={activeTab === ANIME_DETAIL_TAB.DETAILS ? 'active' : ''}
+            onClick={() => handleActiveTab(ANIME_DETAIL_TAB.DETAILS)}
+          >
+            Details
+          </NavLink>
+        </NavItem>
 
-            <dd>{animeDetail?.synopsis ?? 'Empty :('} </dd>
+        <NavItem>
+          <NavLink
+            className={activeTab === ANIME_DETAIL_TAB.CHARACTERS_STAFF ? 'active' : ''}
+            onClick={() => handleActiveTab(ANIME_DETAIL_TAB.CHARACTERS_STAFF)}
+          >
+            Characters & Staff
+          </NavLink>
+        </NavItem>
 
-            <dt>
-              <h5 id="period">Period:</h5>
-            </dt>
+        <NavItem>
+          <NavLink
+            className={activeTab === ANIME_DETAIL_TAB.PICTURES ? 'active' : ''}
+            onClick={() => handleActiveTab(ANIME_DETAIL_TAB.PICTURES)}
+          >
+            Pictures
+          </NavLink>
+        </NavItem>
+      </Nav>
 
-            <dd>{animeDetail?.aired?.period ?? 'Empty :('} </dd>
+      <TabContent activeTab={activeTab}>
+        <TabPane tabId={ANIME_DETAIL_TAB.DETAILS}>
+          <AnimeDetailDescription history={props.history} location={props.location} match={props.match} />
+        </TabPane>
 
-            <dt>
-              <h5 id="period">Producers:</h5>
-            </dt>
+        <TabPane tabId={ANIME_DETAIL_TAB.CHARACTERS_STAFF}>
+          <AnimeDetailCharacters history={props.history} location={props.location} match={props.match} />
+        </TabPane>
 
-            <dd>{animeDetail?.producers?.length > 0 ? animeDetail?.producers?.map(({ name }) => name).join(',') : 'Empty :('} </dd>
-
-            {animePicturesContainer?.pictures?.length > 0 && !isErrorAnimeDetail ? (
-              <>
-                <dt>
-                  <h5 id="pictures">Pictures:</h5>
-                </dt>
-
-                <dd>
-                  <UncontrolledCarousel
-                    items={animePicturesContainer?.pictures?.map((picture, i) => ({
-                      caption: `#${i + 1}`,
-                      altText: picture?.small,
-                      key: i,
-                      src: picture?.small,
-                    }))}
-                  />
-                </dd>
-              </>
-            ) : (
-              ''
-            )}
-          </dl>
-        </div>
-
-        <Button tag={Link} to="/top" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" />
-
-          <span className="d-none d-md-inline">Back</span>
-        </Button>
-      </Col>
-    </Row>
+        <TabPane tabId={ANIME_DETAIL_TAB.PICTURES}>
+          <AnimeDetailPictures history={props.history} location={props.location} match={props.match} />
+        </TabPane>
+      </TabContent>
+    </>
   );
 };
 

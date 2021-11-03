@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassConstructor } from 'class-transformer/types/interfaces';
 
-import { SERVER_API_URL, SERVER_TIMEOUT } from 'app/config/constants';
+import { SERVER_API_URL, SERVER_TIMEOUT } from 'app/helpers/constants';
 import { setupAxiosInterceptors } from 'app/config/interceptors';
 import IBaseResponse from 'app/models/base/IBaseResponse';
 

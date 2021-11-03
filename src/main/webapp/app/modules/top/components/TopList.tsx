@@ -4,7 +4,6 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Progress, Row, Table } from 'reactstrap';
 import { JhiItemCount, JhiPagination } from 'react-jhipster';
 
-import { TOP_ITEMS_PER_PAGE } from 'app/config/constants';
 import animeService from 'app/modules/anime/services/anime.service';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import useTopStore from '../store/top.store';
+import { TOP_ITEMS_PER_PAGE } from '../helpers/constants';
 
 export const TopList = (props: RouteComponentProps<{ url: string }>) => {
   const { match } = props;
@@ -32,7 +32,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
     refetch();
   };
 
-  const handleActivePagination = currentPage => {
+  const handleActivePage = currentPage => {
     setActivePage(currentPage);
   };
 
@@ -42,7 +42,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
   return (
     <>
-      <h2 id="top-heading" data-cy="TopHeading">
+      <h2 id="top-list-heading" data-cy="TopListHeading">
         Top Anime
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={isLoading || isRefetching}>
@@ -69,7 +69,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
                 {response?.top?.map((value, i, array) => {
                   if (i % 2) {
                     return (
-                      <tr key={`entities-${i}`} data-cy="entityTable">
+                      <tr key={`top-list-${i}`} data-cy="topListTable">
                         <td>
                           <Button
                             onMouseEnter={() => handlePrefetch(array[i].id)}
@@ -109,7 +109,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
             <Row className="justify-content-center">
               <JhiPagination
                 activePage={activePage}
-                onSelect={handleActivePagination}
+                onSelect={handleActivePage}
                 maxButtons={5}
                 itemsPerPage={TOP_ITEMS_PER_PAGE}
                 totalItems={response?.contentLength}

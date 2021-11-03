@@ -1,9 +1,8 @@
 import { useQuery } from 'react-query';
 
-import { START_PAGE } from 'app/config/constants';
+import { START_PAGE } from 'app/helpers/constants';
 
 import topService from '../services/top.service';
-
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import BothSubtypeType from '../enums/BothSubtypeType';
 

@@ -1,7 +1,6 @@
 import RequestType from 'app/shared/utils/http-client/enums/request-type';
 import { request } from 'app/shared/utils/http-client';
-
-import { START_PAGE } from 'app/config/constants';
+import { START_PAGE } from 'app/helpers/constants';
 
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import MangaSubtypeType from '../enums/MangaSubtypeType';
