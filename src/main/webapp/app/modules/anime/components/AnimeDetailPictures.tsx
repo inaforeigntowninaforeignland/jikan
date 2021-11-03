@@ -9,26 +9,20 @@ export const AnimeDetailPictures = (props: RouteComponentProps<{ id: string }>) 
 
   const { data: picturesContainer, isLoading, isError, error } = useFetchAnimePicturesById(match.params.id);
 
-  return (
-    <Row>
-      <Col md="8">
-        {isLoading ? (
-          <Progress animated color="info" value="100" />
-        ) : isError ? (
-          <div className="alert alert-danger">{`${error} :(`}</div>
-        ) : picturesContainer?.pictures?.length > 0 ? (
-          <CardGroup>
-            {picturesContainer?.pictures?.map((picture, i) => (
-              <Card key={`picture-${i}`}>
-                <CardImg alt={picture?.small} src={picture?.small} width="100%" />
-              </Card>
-            ))}
-          </CardGroup>
-        ) : (
-          'Empty :('
-        )}
-      </Col>
-    </Row>
+  return isLoading ? (
+    <Progress animated color="info" value="100" />
+  ) : isError ? (
+    <div className="alert alert-danger">{`${error} :(`}</div>
+  ) : picturesContainer?.pictures?.length > 0 ? (
+    <CardGroup>
+      {picturesContainer?.pictures?.map((picture, i) => (
+        <Card key={`picture-${i}`}>
+          <CardImg alt={picture?.small} src={picture?.small} width="100%" />
+        </Card>
+      ))}
+    </CardGroup>
+  ) : (
+    'Empty :('
   );
 };
 

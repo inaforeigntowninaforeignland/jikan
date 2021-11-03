@@ -1,6 +1,8 @@
 import { toast } from 'react-toastify';
 
-export const setupAxiosInterceptors = axiosInstance => {
+import ResponseError from 'app/errors/ResponseError';
+
+export const setupAxiosInterceptors = ({ interceptors }) => {
   const onResponseSuccess = response => ({
     ...response,
     data: {
@@ -9,10 +11,12 @@ export const setupAxiosInterceptors = axiosInstance => {
     },
   });
 
-  const onResponseError = error => {
-    toast.error(`${error.message}`, {
+  const onResponseError = ({ response: { data } }) => {
+    const message = `${data.status}: ${data.message}`;
+
+    toast.error(message, {
       position: 'bottom-right',
-      autoClose: false,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -20,8 +24,8 @@ export const setupAxiosInterceptors = axiosInstance => {
       progress: 0,
     });
 
-    return Promise.reject(error);
+    return Promise.reject(new ResponseError(message));
   };
 
-  axiosInstance.interceptors.response.use(onResponseSuccess, onResponseError);
+  interceptors.response.use(onResponseSuccess, onResponseError);
 };

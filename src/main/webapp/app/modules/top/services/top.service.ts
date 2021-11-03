@@ -1,4 +1,4 @@
-import RequestType from 'app/shared/utils/http-client/enums/request-type';
+import HTTPRequestType from 'app/shared/utils/http-client/enums/HTTPRequestType';
 import { request } from 'app/shared/utils/http-client';
 import { START_PAGE } from 'app/helpers/constants';
 
@@ -24,7 +24,7 @@ export default Object.freeze({
   getTopAnime(subtype?: AnimeSubtypeType | BothSubtypeType, page = START_PAGE) {
     return request<IBaseTop<ITopAnimeDetail>>(
       {
-        method: RequestType.GET,
+        method: HTTPRequestType.GET,
         url: `/top/${TopType.ANIME}/${page}/${subtype}`,
       },
       TopAnimeImpl
@@ -39,7 +39,7 @@ export default Object.freeze({
   getTopManga(subtype?: MangaSubtypeType | BothSubtypeType, page = START_PAGE) {
     return request<IBaseTop<ITopMangaDetail>>(
       {
-        method: RequestType.GET,
+        method: HTTPRequestType.GET,
         url: `/top/${TopType.MANGA}/${page}/${subtype}`,
       },
       TopMangaImpl

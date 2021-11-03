@@ -1,4 +1,4 @@
-import RequestType from 'app/shared/utils/http-client/enums/request-type';
+import HTTPRequestType from 'app/shared/utils/http-client/enums/HTTPRequestType';
 import { request } from 'app/shared/utils/http-client';
 
 import PicturesContainerImpl from 'app/models/picture/impl/PicturesContainerImpl';
@@ -20,7 +20,7 @@ export default Object.freeze({
   getAnimeById(id: number | string) {
     return request<IAnime>(
       {
-        method: RequestType.GET,
+        method: HTTPRequestType.GET,
         url: `/anime/${id}`,
       },
       AnimeImpl
@@ -33,7 +33,7 @@ export default Object.freeze({
   getAnimePicturesById(id: number | string) {
     return request<IPicturesContainer>(
       {
-        method: RequestType.GET,
+        method: HTTPRequestType.GET,
         url: `/anime/${id}/pictures`,
       },
       PicturesContainerImpl
@@ -46,7 +46,7 @@ export default Object.freeze({
   getAnimeCharactersById(id: number | string) {
     return request<IAnimeCharactersContainer>(
       {
-        method: RequestType.GET,
+        method: HTTPRequestType.GET,
         url: `/anime/${id}/characters_staff`,
       },
       AnimeCharactersContainerImpl
