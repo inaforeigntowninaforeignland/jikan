@@ -8,15 +8,11 @@ interface IAnime extends IBaseResponse {
 
   imageUrl: string;
 
-  trailerUrl: string;
-
   title: string;
 
   titleEnglish: string;
 
   titleJapanese: string;
-
-  titleSynonyms: string[];
 
   /**
    * Description

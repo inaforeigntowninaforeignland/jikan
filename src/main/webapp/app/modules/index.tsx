@@ -1,8 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
+import ErrorBoundaryRoute from 'app/shared/error/ErrorBoundaryRoute';
 
 import Top from './top';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Nav, NavLink, NavItem, TabPane, TabContent, Button, Fade } from 'reactstrap';
 
@@ -18,6 +18,10 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   const handleActiveTab = currentTab => {
     setActiveTab(currentTab);
   };
+
+  useEffect(() => {
+    setActiveTab(ANIME_DETAIL_TAB.DETAILS);
+  }, []);
 
   return (
     <Fade>

@@ -72,7 +72,7 @@ export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>
               </Table>
             </div>
           ) : (
-            <></>
+            'Empty :('
           )}
         </dd>
       </dl>

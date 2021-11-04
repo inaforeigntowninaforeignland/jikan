@@ -1,5 +1,9 @@
 // TODO Add JSDoc
-interface IBaseTopDetail extends IBaseModel {
+interface IBaseTopDetail {
+  id: number;
+
+  url: string;
+
   rank: number;
 
   title: string;

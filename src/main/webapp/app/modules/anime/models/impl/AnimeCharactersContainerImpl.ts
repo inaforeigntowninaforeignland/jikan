@@ -1,3 +1,4 @@
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
@@ -9,9 +10,11 @@ import IAnimeCharactersContainer from '../IAnimeCharactersContainer';
 import AnimeCharacterImpl from '../impl/AnimeCharacterImpl';
 
 class AnimeCharactersContainerImpl extends AbstractBaseResponse implements IAnimeCharactersContainer {
+  @ValidateNested()
   @Type(() => AnimeCharacterImpl)
   characters: IAnimeCharacter[];
 
+  @ValidateNested()
   @Type(() => StaffImpl)
   staff: IStaff[];
 }

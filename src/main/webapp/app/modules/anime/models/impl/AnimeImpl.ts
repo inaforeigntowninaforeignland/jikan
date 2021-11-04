@@ -1,3 +1,4 @@
+import { IsDefined, IsOptional, IsNumber, IsString, IsUrl, ValidateNested } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 
 import ExposePropertyType from 'app/enums/ExposePropertyType';
@@ -11,33 +12,43 @@ import IPeriod from 'app/models/period/IPeriod';
 import IAnime from '../IAnime';
 
 class AnimeImpl extends AbstractBaseResponse implements IAnime {
+  @IsDefined()
+  @IsNumber()
   @Expose({ name: ExposePropertyType.MAL_ID })
   id: number;
 
+  @IsOptional()
+  @IsUrl()
   @Expose({ name: ExposePropertyType.IMAGE_URL })
   imageUrl: string;
 
-  @Expose({ name: ExposePropertyType.TRAILER_URL })
-  trailerUrl: string;
-
+  @IsDefined()
+  @IsString()
   title: string;
 
+  @IsOptional()
+  @IsString()
   @Expose({ name: ExposePropertyType.TITLE_ENGLISH })
   titleEnglish: string;
 
+  @IsOptional()
+  @IsString()
   @Expose({ name: ExposePropertyType.TITLE_JAPANESE })
   titleJapanese: string;
 
-  @Expose({ name: ExposePropertyType.TITLE_SYNONYMS })
-  titleSynonyms: string[];
-
+  @IsOptional()
+  @IsString()
   synopsis: string;
 
+  @IsOptional()
+  @IsNumber()
   score: number;
 
+  @ValidateNested()
   @Type(() => RelatedSubTypeImpl)
   producers: IRelatedSubType[];
 
+  @ValidateNested()
   @Type(() => PeriodImpl)
   aired: IPeriod;
 }

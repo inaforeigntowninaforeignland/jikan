@@ -9,9 +9,7 @@ enum ExposePropertyType {
   REQUEST_HASH = 'request_hash',
   VOICE_ACTORS = 'voice_actors',
   TITLE_JAPANESE = 'title_japanese',
-  TITLE_SYNONYMS = 'title_synonyms',
   TITLE_ENGLISH = 'title_english',
-  TRAILER_URL = 'trailer_url',
 }
 
 export default ExposePropertyType;

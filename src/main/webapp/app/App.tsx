@@ -9,7 +9,7 @@ import { hot } from 'react-hot-loader';
 import Header from 'app/shared/layout/header/Header';
 import Footer from 'app/shared/layout/footer/Footer';
 
-import ErrorBoundary from 'app/shared/error/components/ErrorBoundary';
+import ErrorBoundary from 'app/shared/error/ErrorBoundary';
 
 import AppRoutes from 'app/routes';
 

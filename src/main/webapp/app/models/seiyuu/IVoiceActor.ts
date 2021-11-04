@@ -1,5 +1,9 @@
 // TODO Add JSDoc
-interface IVoiceActor extends IBaseModel {
+interface IVoiceActor {
+  id: number;
+
+  url: string;
+
   imageUrl: string;
 
   name: string;

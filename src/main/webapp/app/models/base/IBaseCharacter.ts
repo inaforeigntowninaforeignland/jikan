@@ -1,5 +1,9 @@
 // TODO Add JSDoc
-interface IBaseCharacter extends IBaseModel {
+interface IBaseCharacter {
+  id: number;
+
+  url: string;
+
   name: string;
 
   role: string;

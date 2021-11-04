@@ -1,12 +1,20 @@
+import { IsDefined, IsNumber, IsOptional, IsUrl } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 
 import ExposePropertyType from 'app/enums/ExposePropertyType';
 
-import AbstractBaseModel from 'app/models/base/impl/AbstractBaseModel';
-
 import IBaseTopDetail from '../IBaseTopDetail';
 
-abstract class AbstractBaseTopDetail extends AbstractBaseModel implements IBaseTopDetail {
+abstract class AbstractBaseTopDetail implements IBaseTopDetail {
+  @IsDefined()
+  @IsNumber()
+  @Expose({ name: ExposePropertyType.MAL_ID })
+  id: number;
+
+  @IsOptional()
+  @IsUrl()
+  url: string;
+
   rank: number;
 
   title: string;

@@ -1,3 +1,4 @@
+import { ValidateNested } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 
 import ExposePropertyType from 'app/enums/ExposePropertyType';
@@ -14,6 +15,7 @@ class PeriodImpl implements IPeriod {
   @Type(() => Date)
   to: Date;
 
+  @ValidateNested()
   @Type(() => PeriodPropContainerImpl)
   prop: IPeriodPropContainer;
 
