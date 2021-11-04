@@ -1,11 +1,11 @@
 import React from 'react';
-import { Navbar } from 'reactstrap';
+import { Fade, Navbar } from 'reactstrap';
 
 const Header = () => {
   return (
-    <div id="app-header">
-      <Navbar data-cy="navbar" light expand="sm" fixed="top" className="bg-light" />
-    </div>
+    <Fade>
+      <Navbar light expand="sm" fixed="top" className="bg-light" />
+    </Fade>
   );
 };
 

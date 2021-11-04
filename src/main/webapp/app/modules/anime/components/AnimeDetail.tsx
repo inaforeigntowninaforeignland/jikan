@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Nav, NavLink, NavItem, TabPane, TabContent, Button } from 'reactstrap';
+import { Nav, NavLink, NavItem, TabPane, TabContent, Button, Fade } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -20,10 +20,10 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
   };
 
   return (
-    <>
+    <Fade>
       <Nav tabs>
         <NavItem>
-          <Button tag={Link} to="/top" replace color="info" data-cy="animeDetailBackButton">
+          <Button tag={Link} to="/top" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />
 
             <span className="d-none d-md-inline">Back</span>
@@ -71,7 +71,7 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
           <AnimeDetailPictures history={props.history} location={props.location} match={props.match} />
         </TabPane>
       </TabContent>
-    </>
+    </Fade>
   );
 };
 

@@ -1,23 +1,25 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Progress, CardGroup, Card, CardImg } from 'reactstrap';
+import { Progress, CardGroup, Card, CardImg, Fade } from 'reactstrap';
 
 import { useFetchAnimePicturesById } from '../hooks/useFetchAnimePicturesById';
 
 export const AnimeDetailPictures = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
-  const { data: picturesContainer, isLoading, isError, error } = useFetchAnimePicturesById(match.params.id);
+  const { data: container, isLoading, isError, error } = useFetchAnimePicturesById(match.params.id);
 
   return isLoading ? (
     <Progress animated color="info" value="100" />
   ) : isError ? (
     <div className="alert alert-danger">{`${error} :(`}</div>
-  ) : picturesContainer?.pictures?.length > 0 ? (
+  ) : container?.pictures?.length > 0 ? (
     <CardGroup>
-      {picturesContainer?.pictures?.map((picture, i) => (
-        <Card key={`picture-${i}`}>
-          <CardImg alt={picture?.small} src={picture?.small} width="100%" />
+      {container?.pictures?.map((value, i) => (
+        <Card key={i}>
+          <Fade>
+            <CardImg alt={value?.small} src={value?.small} width="100%" />
+          </Fade>
         </Card>
       ))}
     </CardGroup>

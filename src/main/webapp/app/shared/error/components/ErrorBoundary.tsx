@@ -1,4 +1,5 @@
 import React from 'react';
+import { Fade } from 'reactstrap';
 
 interface IErrorBoundaryProps {
   readonly children: JSX.Element | JSX.Element[];
@@ -33,10 +34,10 @@ class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryS
         ) : undefined;
 
       return (
-        <div>
+        <Fade>
           <h2 className="error">An unexpected error has occurred.</h2>
           {errorDetails}
-        </div>
+        </Fade>
       );
     }
 

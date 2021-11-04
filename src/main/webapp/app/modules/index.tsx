@@ -7,14 +7,14 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import Top from './top';
 
 const Routes = ({ match }) => (
-  <div>
+  <>
     <Switch>
       <ErrorBoundaryRoute path={`${match.url}top`} component={Top} />
       <Route path="/">
         <Redirect to="/top" />
       </Route>
     </Switch>
-  </div>
+  </>
 );
 
 export default Routes;
