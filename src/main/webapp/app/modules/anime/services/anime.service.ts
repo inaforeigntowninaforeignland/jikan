@@ -9,6 +9,8 @@ import AnimeImpl from '../models/impl/AnimeImpl';
 import IAnimeCharactersContainer from '../models/IAnimeCharactersContainer';
 import AnimeCharactersContainerImpl from '../models/impl/AnimeCharactersContainerImpl';
 
+const BASE_URL = 'anime';
+
 /**
  * @see {@link https://jikan.docs.apiary.io/#reference/0/anime}
  */
@@ -21,7 +23,7 @@ export default Object.freeze({
     return request<IAnime>(
       {
         method: HTTPRequestType.GET,
-        url: `/anime/${id}`,
+        url: `/${BASE_URL}/${id}`,
       },
       AnimeImpl
     );
@@ -34,7 +36,7 @@ export default Object.freeze({
     return request<IPicturesContainer>(
       {
         method: HTTPRequestType.GET,
-        url: `/anime/${id}/pictures`,
+        url: `/${BASE_URL}/${id}/pictures`,
       },
       PicturesContainerImpl
     );
@@ -47,7 +49,7 @@ export default Object.freeze({
     return request<IAnimeCharactersContainer>(
       {
         method: HTTPRequestType.GET,
-        url: `/anime/${id}/characters_staff`,
+        url: `/${BASE_URL}/${id}/characters_staff`,
       },
       AnimeCharactersContainerImpl
     );

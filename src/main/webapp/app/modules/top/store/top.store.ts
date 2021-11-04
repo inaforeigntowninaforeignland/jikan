@@ -11,22 +11,22 @@ import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 interface ITopStore {
   activePage: number;
   activeSubtype: AnimeSubtypeType;
-  isOpenSubtypeDropDown: boolean;
+  isOpenSubtypeDropdown: boolean;
   setActivePage: (activePage: number) => void;
-  setActiveSubtype: (activePage: AnimeSubtypeType) => void;
-  toggleSubtypeDropDown: (isOpenSubtypeDropDown: boolean) => void;
+  setActiveSubtype: (activeSubtype: AnimeSubtypeType) => void;
+  toggleSubtypeDropdown: (isOpenSubtypeDropdown: boolean) => void;
 }
 
 const useTopStore = create<ITopStore>(set => ({
   activePage: START_PAGE,
   activeSubtype: AnimeSubtypeType.UPCOMING,
-  isOpenSubtypeDropDown: false,
+  isOpenSubtypeDropdown: false,
   setActivePage: activePage => set(() => ({ activePage })),
   setActiveSubtype: activeSubtype => set(() => ({ activeSubtype })),
-  toggleSubtypeDropDown: isOpenSubtypeDropDown =>
+  toggleSubtypeDropdown: isOpenSubtypeDropdown =>
     set(
       produce(state => {
-        state.isOpenSubtypeDropDown = !isOpenSubtypeDropDown;
+        state.isOpenSubtypeDropdown = !isOpenSubtypeDropdown;
       })
     ),
 }));

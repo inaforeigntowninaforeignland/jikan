@@ -8,9 +8,9 @@ import BothSubtypeType from '../enums/BothSubtypeType';
 
 /**
  * Fetch top anime list
- * @param [subtype] {AnimeSubtypeType | BothSubtypeType} Anime subtype
+ * @param subtype {AnimeSubtypeType | BothSubtypeType} Anime subtype
  * @param page {number} Page
  */
-export const useFetchTopAnime = (subtype?: AnimeSubtypeType | BothSubtypeType, page = START_PAGE) => {
-  return useQuery(['top-anime', page], () => topService.getTopAnime(subtype, page));
+export const useFetchTopAnime = (subtype: AnimeSubtypeType | BothSubtypeType = AnimeSubtypeType.UPCOMING, page = START_PAGE) => {
+  return useQuery(['top-anime', subtype ? `${subtype}[${page}]` : page], () => topService.getTopAnime(subtype, page));
 };

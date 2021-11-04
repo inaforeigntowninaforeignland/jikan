@@ -1,15 +1,13 @@
 import React from 'react';
-import { Fade, Input, InputGroup, InputGroupText, Navbar } from 'reactstrap';
+import { Fade, Navbar } from 'reactstrap';
+
+import SearchPanel from 'app/modules/search/components/SearchPanel';
 
 const Header = () => {
   return (
     <Fade>
       <Navbar light expand="sm" fixed="top" className="jh-navbar">
-        <InputGroup>
-          <Input />
-
-          <InputGroupText>Search</InputGroupText>
-        </InputGroup>
+        <SearchPanel />
       </Navbar>
     </Fade>
   );

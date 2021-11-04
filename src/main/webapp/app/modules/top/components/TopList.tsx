@@ -1,4 +1,4 @@
-// import { useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Fade, Progress, Row, Table } from 'reactstrap';
@@ -24,28 +24,28 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
   // endregion
 
-  // region Subtype DropDown
+  // region Subtype dropdown
 
   const activeSubtype = useTopStore(state => state.activeSubtype);
 
-  const isOpenSubtypeDropDown = useTopStore(state => state.isOpenSubtypeDropDown);
+  const isOpenSubtypeDropdown = useTopStore(state => state.isOpenSubtypeDropdown);
 
   const setActiveSubtype = useTopStore(state => state.setActiveSubtype);
 
-  const toggleSubtypeDropDown = useTopStore(state => state.toggleSubtypeDropDown);
+  const toggleSubtypeDropdown = useTopStore(state => state.toggleSubtypeDropdown);
 
   // endregion
 
   const { data: container, isLoading, isRefetching, isError, error, refetch } = useFetchTopAnime(activeSubtype, activePage);
 
-  // const queryClient = useQueryClient();
-  //
+  const queryClient = useQueryClient();
+
   // const handlePrefetch = id => {
   //   queryClient.prefetchQuery(['anime', id], () => animeService.getAnimeById(id));
   // };
 
   const handleSyncList = () => {
-    refetch();
+    queryClient.invalidateQueries(['top-anime', activePage]);
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
       <h2>
         #Top Anime Series
         <div className="d-flex justify-content-end">
-          <Dropdown isOpen={isOpenSubtypeDropDown} toggle={() => toggleSubtypeDropDown(isOpenSubtypeDropDown)}>
+          <Dropdown isOpen={isOpenSubtypeDropdown} toggle={() => toggleSubtypeDropdown(isOpenSubtypeDropdown)}>
             <DropdownToggle color="primary" caret className="dropdown-toggle text-capitalize">
               {`Top ${activeSubtype}`}
             </DropdownToggle>

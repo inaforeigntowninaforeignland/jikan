@@ -24,7 +24,7 @@ export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>
 
         <dd>
           {container?.staff?.length > 0
-            ? container?.staff?.map(({ name, positions }) => `${name} (${positions.join(',')})`).join('; ')
+            ? container?.staff?.map(({ name, positions }) => `${name} (${positions.join(', ')})`).join('; ')
             : 'Empty :('}{' '}
         </dd>
 
