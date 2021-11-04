@@ -10,6 +10,7 @@ enum ExposePropertyType {
   VOICE_ACTORS = 'voice_actors',
   TITLE_JAPANESE = 'title_japanese',
   TITLE_ENGLISH = 'title_english',
+  LAST_PAGE = 'last_page',
 }
 
 export default ExposePropertyType;

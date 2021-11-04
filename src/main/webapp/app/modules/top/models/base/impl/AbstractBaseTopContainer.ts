@@ -1,3 +1,4 @@
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import AbstractBaseResponse from 'app/models/base/impl/AbstractBaseResponse';
@@ -12,6 +13,7 @@ abstract class AbstractBaseTopContainer<T extends IBaseTopDetail> extends Abstra
   // eslint-disable-next-line @typescript-eslint/ban-types
   type: Function;
 
+  @ValidateNested()
   @Type(options => {
     return (options?.newObject as AbstractBaseTopContainer<T>).type;
   })

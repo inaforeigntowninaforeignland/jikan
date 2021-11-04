@@ -1,14 +1,14 @@
-import { IsDefined, IsUrl } from 'class-validator';
+import { IsOptional, IsUrl } from 'class-validator';
 
 import IPictureDetail from '../IPictureDetail';
 
 class PictureDetailImpl implements IPictureDetail {
+  @IsOptional()
   @IsUrl()
-  @IsDefined()
   large: string;
 
+  @IsOptional()
   @IsUrl()
-  @IsDefined()
   small: string;
 }
 

@@ -2,9 +2,17 @@ import create from 'zustand';
 
 import { ANIME_DETAIL_TAB } from '../helpers/constants';
 
-const useTopStore = create(set => ({
+/**
+ * Anime store
+ */
+interface IAnimeStore {
+  activeTab: string;
+  setActiveTab: (activePage: string) => void;
+}
+
+const useAnimeStore = create<IAnimeStore>(set => ({
   activeTab: ANIME_DETAIL_TAB.DETAILS,
   setActiveTab: activeTab => set(() => ({ activeTab })),
 }));
 
-export default useTopStore;
+export default useAnimeStore;
