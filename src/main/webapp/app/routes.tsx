@@ -11,6 +11,7 @@ const Routes = () => {
     <div className="view-routes">
       <Switch>
         <ErrorBoundaryRoute path="/" component={Modules} />
+
         <ErrorBoundaryRoute component={PageNotFound} />
       </Switch>
     </div>

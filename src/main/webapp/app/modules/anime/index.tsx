@@ -5,14 +5,14 @@ import ErrorBoundaryRoute from 'app/shared/error/ErrorBoundaryRoute';
 
 import AnimeDetail from '../anime/components/AnimeDetail';
 
-import TopList from './components/TopList';
+import AnimeList from './components/AnimeList';
 
 const Routes = ({ match }) => (
   <>
     <Switch>
       <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={AnimeDetail} />
 
-      <ErrorBoundaryRoute path={match.url} component={TopList} />
+      <ErrorBoundaryRoute path={match.url} component={AnimeList} />
     </Switch>
   </>
 );

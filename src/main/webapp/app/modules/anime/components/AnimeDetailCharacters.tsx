@@ -13,7 +13,9 @@ export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>
     <Progress animated color="info" value="100" />
   ) : isError ? (
     <div className="alert alert-danger">{`${error} :(`}</div>
-  ) : !(container?.characters?.length < 0) ? (
+  ) : container?.characters?.length < 0 ? (
+    <div className="alert alert-info">Empty :(</div>
+  ) : (
     <Fade>
       <dl className="jh-entity-details">
         <h1>Characters & Voice Actors & Staff</h1>
@@ -25,7 +27,7 @@ export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>
         <dd>
           {container?.staff?.length > 0
             ? container?.staff?.map(({ name, positions }) => `${name} (${positions.join(', ')})`).join('; ')
-            : 'Empty :('}{' '}
+            : 'Empty :('}
         </dd>
 
         <dt>
@@ -77,8 +79,6 @@ export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>
         </dd>
       </dl>
     </Fade>
-  ) : (
-    <div className="alert alert-info">{`Empty :(`}</div>
   );
 };
 

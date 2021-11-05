@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { devtools } from 'zustand/middleware';
 import produce from 'immer';
 
 import { START_PAGE } from 'app/helpers/constants';
@@ -17,18 +18,20 @@ interface ITopStore {
   toggleSubtypeDropdown: (isOpenSubtypeDropdown: boolean) => void;
 }
 
-const useTopStore = create<ITopStore>(set => ({
-  activePage: START_PAGE,
-  activeSubtype: AnimeSubtypeType.UPCOMING,
-  isOpenSubtypeDropdown: false,
-  setActivePage: activePage => set(() => ({ activePage })),
-  setActiveSubtype: activeSubtype => set(() => ({ activeSubtype })),
-  toggleSubtypeDropdown: isOpenSubtypeDropdown =>
-    set(
-      produce(state => {
-        state.isOpenSubtypeDropdown = !isOpenSubtypeDropdown;
-      })
-    ),
-}));
+const useTopStore = create<ITopStore>(
+  devtools(set => ({
+    activePage: START_PAGE,
+    activeSubtype: AnimeSubtypeType.UPCOMING,
+    isOpenSubtypeDropdown: false,
+    setActivePage: activePage => set(() => ({ activePage })),
+    setActiveSubtype: activeSubtype => set(() => ({ activeSubtype })),
+    toggleSubtypeDropdown: isOpenSubtypeDropdown =>
+      set(
+        produce(state => {
+          state.isOpenSubtypeDropdown = !isOpenSubtypeDropdown;
+        })
+      ),
+  }))
+);
 
 export default useTopStore;

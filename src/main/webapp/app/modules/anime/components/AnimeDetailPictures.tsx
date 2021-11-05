@@ -24,7 +24,7 @@ export const AnimeDetailPictures = (props: RouteComponentProps<{ id: string }>) 
       ))}
     </CardGroup>
   ) : (
-    <div className="alert alert-info">{`Empty :(`}</div>
+    <div className="alert alert-info">Empty :(</div>
   );
 };
 

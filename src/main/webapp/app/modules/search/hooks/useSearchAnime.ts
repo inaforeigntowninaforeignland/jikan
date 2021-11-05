@@ -1,18 +1,21 @@
 import { useQuery } from 'react-query';
 
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
-import { START_PAGE } from 'app/helpers/constants';
+import CacheKeyType from 'app/enums/CacheKeyType';
 
 import searchService from '../services/search.service';
+import useSearchStore from '../store/search.store';
 
 /**
  * Search anime
  * @param [query] {string} Query
  * @param type {AnimeSubtypeType} Anime subtype
- * @param page {number} Page
  */
-export const useSearchAnime = (query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING, page: number = START_PAGE) => {
-  return useQuery(['search-anime', query ? `${type}[${page}]:${query}` : `${type}[${page}]`], () =>
-    searchService.searchAnime(query, type, page)
-  );
+export const useSearchAnime = (query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING) => {
+  const searchPanelStatus = useSearchStore(state => state.searchPanelStatus);
+
+  return useQuery([CacheKeyType.SEARCH_ANIME, query ? `${type}:${query}` : type], () => searchService.searchAnime(query, type), {
+    enabled: searchPanelStatus,
+    refetchOnWindowFocus: false,
+  });
 };

@@ -1,7 +1,6 @@
 import HTTPRequestType from 'app/shared/utils/http-client/enums/HTTPRequestType';
 import { request } from 'app/shared/utils/http-client';
 
-import { START_PAGE } from 'app/helpers/constants';
 import EntityType from 'app/enums/EntityType';
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
 import MangaSubtypeType from 'app/modules/top/enums/MangaSubtypeType';
@@ -22,12 +21,11 @@ export default Object.freeze({
    * Search anime
    * @param [query] {string} Query
    * @param type {AnimeSubtypeType} Anime subtype
-   * @param page {number} Page
    */
-  searchAnime(query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING, page: number = START_PAGE) {
-    const url = `/${BASE_URL}/${EntityType.ANIME}?type=${type}&page=${page}`;
+  searchAnime(query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING) {
+    let url = `/${BASE_URL}/${EntityType.ANIME}?type=${type}`;
 
-    query && url.concat(`&q=${query}`);
+    url = url.concat(query ? `&q=${query}` : '&q=');
 
     return request<IBaseSearchContainer<ISearchAnimeDetail>>(
       {
@@ -42,12 +40,11 @@ export default Object.freeze({
    * Search manga
    * @param [query] {string} Query
    * @param type {MangaSubtypeType} Manga subtype
-   * @param page {number} Page
    */
-  searchManga(query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA, page: number = START_PAGE) {
-    const url = `/${BASE_URL}/${EntityType.MANGA}?type=${type}&page=${page}`;
+  searchManga(query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA) {
+    let url = `/${BASE_URL}/${EntityType.MANGA}?type=${type}`;
 
-    query && url.concat(`&q=${query}`);
+    url = url.concat(query ? `&q=${query}` : '&q=');
 
     return request<IBaseSearchContainer<ISearchMangaDetail>>(
       {

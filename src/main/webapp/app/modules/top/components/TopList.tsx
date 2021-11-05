@@ -1,17 +1,12 @@
-import { useQueryClient } from 'react-query';
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Fade, Progress, Row, Table } from 'reactstrap';
 import { JhiItemCount, JhiPagination } from 'react-jhipster';
 
-// import animeService from 'app/modules/anime/services/anime.service';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import useTopStore from '../store/top.store';
-import { TOP_ITEMS_PER_PAGE, MAX_PAGINATION_BUTTONS } from '../helpers/constants';
+import { TOP_ANIME_ITEMS_PER_PAGE, MAX_PAGINATION_BUTTONS } from '../helpers/constants';
 
 export const TopList = (props: RouteComponentProps<{ url: string }>) => {
   const { match } = props;
@@ -38,16 +33,6 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
   const { data: container, isLoading, isRefetching, isError, error, refetch } = useFetchTopAnime(activeSubtype, activePage);
 
-  const queryClient = useQueryClient();
-
-  // const handlePrefetch = id => {
-  //   queryClient.prefetchQuery(['anime', id], () => animeService.getAnimeById(id));
-  // };
-
-  const handleSyncList = () => {
-    queryClient.invalidateQueries(['top-anime', activePage]);
-  };
-
   useEffect(() => {
     refetch();
   }, [activePage]);
@@ -59,7 +44,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <Fade>
       <h2>
-        #Top Anime Series
+        Top Anime Series
         <div className="d-flex justify-content-end">
           <Dropdown isOpen={isOpenSubtypeDropdown} toggle={() => toggleSubtypeDropdown(isOpenSubtypeDropdown)}>
             <DropdownToggle color="primary" caret className="dropdown-toggle text-capitalize">
@@ -80,10 +65,6 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
               })}
             </DropdownMenu>
           </Dropdown>
-
-          <Button className="mr-2" color="info" onClick={handleSyncList} disabled={isLoading || isRefetching}>
-            <FontAwesomeIcon icon="sync" spin={isLoading || isRefetching} /> Refresh List
-          </Button>
         </div>
       </h2>
 
@@ -92,12 +73,8 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
       ) : isError ? (
         <div className="alert alert-danger fade show">{`${error} :(`}</div>
       ) : container?.top?.length < 0 ? (
-        <div className="alert alert-warning fade show">Nothing found</div>
+        <div className="alert alert-info">Empty :(</div>
       ) : (
-        ''
-      )}
-
-      {container?.top?.length > 0 ? (
         <Fade>
           <div className="table-bordered table-responsive text-center">
             <Table responsive>
@@ -127,7 +104,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
           <div className={container?.top?.length > 0 ? '' : 'd-none'}>
             <Row className="justify-content-center">
-              <JhiItemCount page={activePage} total={container?.contentLength} itemsPerPage={TOP_ITEMS_PER_PAGE} />
+              <JhiItemCount page={activePage} total={container?.contentLength} itemsPerPage={TOP_ANIME_ITEMS_PER_PAGE} />
             </Row>
 
             <Row className="justify-content-center">
@@ -135,14 +112,12 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
                 activePage={activePage}
                 onSelect={setActivePage}
                 maxButtons={MAX_PAGINATION_BUTTONS}
-                itemsPerPage={TOP_ITEMS_PER_PAGE}
+                itemsPerPage={TOP_ANIME_ITEMS_PER_PAGE}
                 totalItems={container?.contentLength}
               />
             </Row>
           </div>
         </Fade>
-      ) : (
-        ''
       )}
     </Fade>
   );
