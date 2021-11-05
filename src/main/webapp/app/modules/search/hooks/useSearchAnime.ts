@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
-import CacheKeyType from 'app/enums/CacheKeyType';
+import { CacheKey } from 'app/helpers/constants';
 
 import searchService from '../services/search.service';
 
@@ -11,7 +11,7 @@ import searchService from '../services/search.service';
  * @param type {AnimeSubtypeType} Anime subtype
  */
 export const useSearchAnime = (query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING) => {
-  return useQuery([CacheKeyType.SEARCH_ANIME, query ? `${type}:${query}` : type], () => searchService.searchAnime(query, type), {
+  return useQuery([CacheKey.SEARCH_ANIME, query ? `${type}:${query}` : type], () => searchService.searchAnime(query, type), {
     enabled: false,
     refetchOnWindowFocus: false,
     retry: false,

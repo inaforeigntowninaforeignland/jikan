@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { RouteKey } from 'app/helpers/constants';
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
 
 import useSearchStore from '../store/search.store';
@@ -36,13 +37,13 @@ export const SearchPanel = () => {
 
   const handleSearch = () => {
     refetch().then(result => {
-      !result.isError && history.push('/anime');
+      !result.isError && history.push(`/${RouteKey.ANIME}`);
     });
   };
 
   return (
     <InputGroup>
-      <Button tag={Link} to="/top" className="mr-2" color="info">
+      <Button tag={Link} to={`/${RouteKey.TOP}`} className="mr-2" color="info">
         #Top
       </Button>
 

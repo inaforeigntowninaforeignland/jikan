@@ -1,9 +1,9 @@
-import { queryClient } from 'app/shared/utils/query-client';
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Fade, Table } from 'reactstrap';
 
-import CacheKeyType from 'app/enums/CacheKeyType';
+import { queryClient } from 'app/shared/utils/query-client';
+import { CacheKey } from 'app/helpers/constants';
 import IBaseSearchContainer from 'app/modules/search/models/base/IBaseSearchContainer';
 import ISearchAnimeDetail from 'app/modules/search/models/anime/ISearchAnimeDetail';
 import useSearchStore from 'app/modules/search/store/search.store';
@@ -22,7 +22,7 @@ export const AnimeList = (props: RouteComponentProps<{ url: string }>) => {
   const setAnime = useAnimeStore(state => state.setAnime);
 
   const container = queryClient.getQueryData<IBaseSearchContainer<ISearchAnimeDetail>>([
-    CacheKeyType.SEARCH_ANIME,
+    CacheKey.SEARCH_ANIME,
     searchText ? `${activeSearchType}:${searchText}` : `${activeSearchType}`,
   ]);
 
@@ -44,13 +44,11 @@ export const AnimeList = (props: RouteComponentProps<{ url: string }>) => {
                     </td>
 
                     <td className="text-left">
-                      <dl>
-                        <dt>
-                          <h5>Title:</h5>
-                        </dt>
+                      <Button tag={Link} to={`${match.url}/${array[i].id}`} color="link" size="sm">
+                        <h1>{array[i].title}</h1>
+                      </Button>
 
-                        <dd>{array[i].title || 'Empty :('} </dd>
-
+                      <dl className="jh-entity-details">
                         <dt>
                           <h5>⭐</h5>
                         </dt>

@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import CacheKeyType from 'app/enums/CacheKeyType';
+import { CacheKey } from 'app/helpers/constants';
 
 import animeService from '../services/anime.service';
 
@@ -9,7 +9,7 @@ import animeService from '../services/anime.service';
  * @param id {number | string} Anime id
  */
 export const useFetchAnimeCharactersById = (id: number | string) => {
-  return useQuery([CacheKeyType.ANIME_CHARACTERS, id], () => animeService.getAnimeCharactersById(id), {
+  return useQuery([CacheKey.ANIME_CHARACTERS, id], () => animeService.getAnimeCharactersById(id), {
     refetchOnWindowFocus: false,
     retry: false,
   });
