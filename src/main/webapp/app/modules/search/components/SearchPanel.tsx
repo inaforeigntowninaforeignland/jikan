@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -42,6 +42,10 @@ export const SearchPanel = () => {
 
   return (
     <InputGroup>
+      <Button tag={Link} to="/top" className="mr-2" color="info">
+        #Top
+      </Button>
+
       <Input
         disabled={isLoading || isRefetching}
         placeholder="Search anime..."

@@ -23,9 +23,10 @@ export default Object.freeze({
    * @param type {AnimeSubtypeType} Anime subtype
    */
   searchAnime(query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING) {
-    let url = `/${BASE_URL}/${EntityType.ANIME}?type=${type}`;
+    let url = `/${BASE_URL}/${EntityType.ANIME}?`;
 
-    url = url.concat(query ? `&q=${query}` : '&q=');
+    url = url.concat(query ? `q=${query}` : 'q=');
+    url = url.concat(`&type=${type}`);
 
     return request<IBaseSearchContainer<ISearchAnimeDetail>>(
       {
@@ -42,9 +43,10 @@ export default Object.freeze({
    * @param type {MangaSubtypeType} Manga subtype
    */
   searchManga(query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA) {
-    let url = `/${BASE_URL}/${EntityType.MANGA}?type=${type}`;
+    let url = `/${BASE_URL}/${EntityType.MANGA}?`;
 
-    url = url.concat(query ? `&q=${query}` : '&q=');
+    url = url.concat(query ? `q=${query}` : 'q=');
+    url = url.concat(`&type=${type}`);
 
     return request<IBaseSearchContainer<ISearchMangaDetail>>(
       {

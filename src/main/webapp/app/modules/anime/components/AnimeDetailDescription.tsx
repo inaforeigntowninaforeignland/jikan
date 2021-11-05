@@ -23,13 +23,13 @@ export const AnimeDetailDescription = (props: RouteComponentProps<{ id: string }
           <h5>Description:</h5>
         </dt>
 
-        <dd>{animeDetail?.synopsis ?? 'Empty :('} </dd>
+        <dd>{animeDetail?.synopsis || 'Empty :('} </dd>
 
         <dt>
           <h5>Period:</h5>
         </dt>
 
-        <dd>{animeDetail?.aired?.period ?? 'Empty :('} </dd>
+        <dd>{animeDetail?.aired?.period || 'Empty :('} </dd>
 
         <dt>
           <h5>Producers:</h5>

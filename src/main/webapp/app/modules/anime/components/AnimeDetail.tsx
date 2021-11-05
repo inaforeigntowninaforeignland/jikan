@@ -11,6 +11,8 @@ import AnimeDetailDescription from '../components/AnimeDetailDescription';
 import AnimeDetailCharacters from '../components/AnimeDetailCharacters';
 
 export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
+  const { history } = props;
+
   const activeTab = useAnimeStore(state => state.activeTab);
 
   const setActiveTab = useAnimeStore(state => state.setActiveTab);
@@ -27,7 +29,7 @@ export const AnimeDetail = (props: RouteComponentProps<{ id: string }>) => {
     <Fade>
       <Nav tabs>
         <NavItem>
-          <Button tag={Link} to="/top" replace color="info">
+          <Button onClick={() => history.goBack()} color="info">
             <FontAwesomeIcon icon="arrow-left" />
 
             <span className="d-none d-md-inline">Back</span>
