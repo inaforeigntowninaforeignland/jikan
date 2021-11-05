@@ -1,6 +1,4 @@
-import { toast } from 'react-toastify';
-
-import ResponseError from 'app/errors/ResponseError';
+import ResponseErrorImpl from 'app/errors/impl/ResponseErrorImpl';
 
 export const setupAxiosInterceptors = ({ interceptors }) => {
   const onResponseSuccess = response => ({
@@ -12,23 +10,7 @@ export const setupAxiosInterceptors = ({ interceptors }) => {
   });
 
   const onResponseError = error => {
-    const data = error?.response?.data;
-
-    const message = data ? `${data.status}: ${data.message}` : 'The connection has timed out. The server is taking too long to respond.';
-
-    if (process.env.NODE_ENV === 'development') {
-      toast.error(message, {
-        position: 'bottom-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-      });
-    }
-
-    return Promise.reject(new ResponseError(message));
+    return Promise.reject(new ResponseErrorImpl(error?.response?.data));
   };
 
   interceptors.response.use(onResponseSuccess, onResponseError);

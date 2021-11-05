@@ -1,5 +1,5 @@
-import HTTPRequestType from 'app/shared/utils/http-client/enums/HTTPRequestType';
-import { request } from 'app/shared/utils/http-client';
+import HTTPRequestType from 'app/enums/HTTPRequestType';
+import { request } from 'app/helpers/http-client';
 
 import PicturesContainerImpl from 'app/models/picture/impl/PicturesContainerImpl';
 import IPicturesContainer from 'app/models/picture/IPicturesContainer';

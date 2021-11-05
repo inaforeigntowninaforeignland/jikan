@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 
+import IResponseError from 'app/errors/IResponseError';
 import MangaSubtypeType from 'app/modules/top/enums/MangaSubtypeType';
 import { CacheKey } from 'app/helpers/constants';
 
@@ -13,7 +14,7 @@ import ISearchMangaDetail from '../models/manga/ISearchMangaDetail';
  * @param type {MangaSubtypeType} Manga subtype
  */
 export const useSearchManga = (query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA) => {
-  return useQuery<IBaseSearchContainer<ISearchMangaDetail>, Error>(
+  return useQuery<IBaseSearchContainer<ISearchMangaDetail>, IResponseError>(
     [CacheKey.SEARCH_MANGA, query ? `${type}:${query}` : type],
     () => searchService.searchManga(query, type),
     {

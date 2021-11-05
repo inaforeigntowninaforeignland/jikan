@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 
 import { CacheKey } from 'app/helpers/constants';
 import { START_PAGE } from 'app/helpers/constants';
+import IResponseError from 'app/errors/IResponseError';
 
 import IBaseTopContainer from '../models/base/IBaseTopContainer';
 import ITopAnimeDetail from '../models/anime/ITopAnimeDetail';
@@ -15,7 +16,7 @@ import BothSubtypeType from '../enums/BothSubtypeType';
  * @param page {number} Page
  */
 export const useFetchTopAnime = (subtype: AnimeSubtypeType | BothSubtypeType = AnimeSubtypeType.UPCOMING, page = START_PAGE) => {
-  return useQuery<IBaseTopContainer<ITopAnimeDetail>, Error>(
+  return useQuery<IBaseTopContainer<ITopAnimeDetail>, IResponseError>(
     [CacheKey.TOP_ANIME, subtype ? `${subtype}[${page}]` : page],
     () => topService.getTopAnime(subtype, page),
     {

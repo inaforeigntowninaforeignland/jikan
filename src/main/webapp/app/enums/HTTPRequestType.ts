@@ -1,7 +1,3 @@
-/**
- * @enum {HTTPRequestType}
- * @property {String} GET GET
- */
 enum HTTPRequestType {
   GET = 'GET',
 }

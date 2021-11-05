@@ -62,6 +62,7 @@ export const SearchPanel = () => {
       </Button>
 
       <Input
+        type="search"
         disabled={isLoading || isRefetching}
         placeholder="Search anime..."
         value={searchText}

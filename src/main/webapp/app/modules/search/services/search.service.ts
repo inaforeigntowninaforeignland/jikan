@@ -1,5 +1,5 @@
-import HTTPRequestType from 'app/shared/utils/http-client/enums/HTTPRequestType';
-import { request } from 'app/shared/utils/http-client';
+import HTTPRequestType from 'app/enums/HTTPRequestType';
+import { request } from 'app/helpers/http-client';
 
 import EntityType from 'app/enums/EntityType';
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Fade, Table } from 'reactstrap';
 
-import { queryClient } from 'app/shared/utils/query-client';
+import { queryClient } from 'app/helpers/query-client';
 import { CacheKey } from 'app/helpers/constants';
 import IBaseSearchContainer from 'app/modules/search/models/base/IBaseSearchContainer';
 import ISearchAnimeDetail from 'app/modules/search/models/anime/ISearchAnimeDetail';

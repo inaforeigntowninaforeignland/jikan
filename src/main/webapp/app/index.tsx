@@ -6,7 +6,7 @@ import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import ErrorBoundary from './shared/error/ErrorBoundary';
-import { queryClient } from './shared/utils/query-client';
+import { queryClient } from './helpers/query-client';
 import { setupIcons } from './config/icons';
 import AppComponent from './App';
 

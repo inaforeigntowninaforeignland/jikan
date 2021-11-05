@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 
+import IResponseError from 'app/errors/IResponseError';
 import { CacheKey } from 'app/helpers/constants';
 import { START_PAGE } from 'app/helpers/constants';
 
@@ -15,7 +16,7 @@ import ITopMangaDetail from '../models/manga/ITopMangaDetail';
  * @param page {number} Page
  */
 export const useFetchTopManga = (subtype: MangaSubtypeType | BothSubtypeType = MangaSubtypeType.MANGA, page = START_PAGE) => {
-  return useQuery<IBaseTopContainer<ITopMangaDetail>, Error>(
+  return useQuery<IBaseTopContainer<ITopMangaDetail>, IResponseError>(
     [CacheKey.TOP_MANGA, subtype ? `${subtype}[${page}]` : page],
     () => topService.getTopManga(subtype, page),
     {
