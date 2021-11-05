@@ -3,6 +3,8 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Fade, Progress, Row, Table } from 'reactstrap';
 import { JhiItemCount, JhiPagination } from 'react-jhipster';
 
+import ErrorAlert from 'app/shared/error/ErrorAlert';
+
 import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import useTopStore from '../store/top.store';
@@ -14,6 +16,8 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
   // region Pagination
 
   const activePage = useTopStore(state => state.activePage);
+
+  const prevPage = useTopStore(state => state.prevPage);
 
   const setActivePage = useTopStore(state => state.setActivePage);
 
@@ -35,11 +39,15 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
 
   useEffect(() => {
     refetch();
-  }, [activePage]);
+  }, [activePage, activeSubtype]);
 
-  useEffect(() => {
+  const handlerGoBack = () => {
+    setActivePage(prevPage);
+  };
+
+  const handlerTryAgain = () => {
     refetch();
-  }, [activeSubtype]);
+  };
 
   return (
     <Fade>
@@ -71,7 +79,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
       {isLoading || isRefetching ? (
         <Progress animated color="info" value="100" />
       ) : isError ? (
-        <div className="alert alert-danger fade show">{`${error} :(`}</div>
+        <ErrorAlert error={error} tryAgain={handlerTryAgain} goBack={handlerGoBack} />
       ) : container?.top?.length < 0 ? (
         <div className="alert alert-info">Empty :(</div>
       ) : (

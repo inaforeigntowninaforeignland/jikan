@@ -2,17 +2,32 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Fade, Progress } from 'reactstrap';
 
+import ErrorAlert from 'app/shared/error/ErrorAlert';
+
 import { useFetchAnimeById } from '../hooks/useFetchAnimeById';
+import useAnimeStore from '../store/anime.store';
 
 export const AnimeDetailDescription = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
-  const { data: animeDetail, isLoading, isError, error } = useFetchAnimeById(match.params.id);
+  const { data: animeDetail, isLoading, isError, error, refetch } = useFetchAnimeById(match.params.id);
+
+  const prevTab = useAnimeStore(state => state.prevTab);
+
+  const setActiveTab = useAnimeStore(state => state.setActiveTab);
+
+  const handlerTryAgain = () => {
+    refetch();
+  };
+
+  const handlerGoBack = () => {
+    setActiveTab(prevTab);
+  };
 
   return isLoading ? (
     <Progress animated color="info" value="100" />
   ) : isError ? (
-    <div className="alert alert-danger">{`${error} :(`}</div>
+    <ErrorAlert error={error} tryAgain={handlerTryAgain} goBack={handlerGoBack} />
   ) : (
     <Fade>
       <h1>{animeDetail?.title}</h1>

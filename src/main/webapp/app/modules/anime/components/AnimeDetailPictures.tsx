@@ -2,17 +2,32 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Progress, CardGroup, Card, CardImg, Fade } from 'reactstrap';
 
+import ErrorAlert from 'app/shared/error/ErrorAlert';
+
 import { useFetchAnimePicturesById } from '../hooks/useFetchAnimePicturesById';
+import useAnimeStore from '../store/anime.store';
 
 export const AnimeDetailPictures = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
-  const { data: container, isLoading, isError, error } = useFetchAnimePicturesById(match.params.id);
+  const { data: container, isLoading, isError, error, refetch } = useFetchAnimePicturesById(match.params.id);
+
+  const prevTab = useAnimeStore(state => state.prevTab);
+
+  const setActiveTab = useAnimeStore(state => state.setActiveTab);
+
+  const handlerTryAgain = () => {
+    refetch();
+  };
+
+  const handlerGoBack = () => {
+    setActiveTab(prevTab);
+  };
 
   return isLoading ? (
     <Progress animated color="info" value="100" />
   ) : isError ? (
-    <div className="alert alert-danger">{`${error} :(`}</div>
+    <ErrorAlert error={error} tryAgain={handlerTryAgain} goBack={handlerGoBack} />
   ) : container?.pictures?.length > 0 ? (
     <CardGroup>
       {container?.pictures?.map((value, i) => (

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup } from 'reactstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { RouteKey } from 'app/helpers/constants';
+import { RouteKey, START_PAGE } from 'app/helpers/constants';
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
+import useTopStore from 'app/modules/top/store/top.store';
 
 import useSearchStore from '../store/search.store';
 import { useSearchAnime } from '../hooks/useSearchAnime';
@@ -31,6 +32,8 @@ export const SearchPanel = () => {
 
   // endregion
 
+  const setActivePage = useTopStore(state => state.setActivePage);
+
   const history = useHistory();
 
   const { isLoading, isRefetching, isError, refetch } = useSearchAnime(searchText, activeSearchType);
@@ -41,10 +44,21 @@ export const SearchPanel = () => {
     });
   };
 
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const handleHome = () => {
+    setActivePage(START_PAGE);
+    history.push(`/${RouteKey.TOP}`);
+  };
+
   return (
     <InputGroup>
-      <Button tag={Link} to={`/${RouteKey.TOP}`} className="mr-2" color="info">
-        #Top
+      <Button onClick={() => handleHome()} className="mr-2" color="info">
+        🏠
       </Button>
 
       <Input
@@ -52,6 +66,7 @@ export const SearchPanel = () => {
         placeholder="Search anime..."
         value={searchText}
         onChange={event => setSearchText(event.target.value)}
+        onKeyDown={handleKeyDown}
       />
 
       <Button className="mr-2" color={isError ? 'danger' : 'info'} onClick={() => handleSearch()} disabled={isLoading || isRefetching}>

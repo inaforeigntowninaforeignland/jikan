@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 import { CacheKey } from 'app/helpers/constants';
 import { START_PAGE } from 'app/helpers/constants';
 
+import IBaseTopContainer from '../models/base/IBaseTopContainer';
+import ITopAnimeDetail from '../models/anime/ITopAnimeDetail';
 import topService from '../services/top.service';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
 import BothSubtypeType from '../enums/BothSubtypeType';
@@ -13,8 +15,12 @@ import BothSubtypeType from '../enums/BothSubtypeType';
  * @param page {number} Page
  */
 export const useFetchTopAnime = (subtype: AnimeSubtypeType | BothSubtypeType = AnimeSubtypeType.UPCOMING, page = START_PAGE) => {
-  return useQuery([CacheKey.TOP_ANIME, subtype ? `${subtype}[${page}]` : page], () => topService.getTopAnime(subtype, page), {
-    refetchOnWindowFocus: false,
-    retry: false,
-  });
+  return useQuery<IBaseTopContainer<ITopAnimeDetail>, Error>(
+    [CacheKey.TOP_ANIME, subtype ? `${subtype}[${page}]` : page],
+    () => topService.getTopAnime(subtype, page),
+    {
+      refetchOnWindowFocus: false,
+      retry: false,
+    }
+  );
 };

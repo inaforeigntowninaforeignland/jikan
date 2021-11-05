@@ -49,11 +49,7 @@ export const AnimeList = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
 
                       <dl className="jh-entity-details">
-                        <dt>
-                          <h5>⭐</h5>
-                        </dt>
-
-                        <dd>{array[i].score ?? 'Empty :('} </dd>
+                        <dd>{array[i].score ? `${array[i].score} ⭐` : ''} </dd>
 
                         <dt>
                           <h5>Description:</h5>

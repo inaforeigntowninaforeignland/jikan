@@ -3,13 +3,14 @@ import { useQuery } from 'react-query';
 import { CacheKey } from 'app/helpers/constants';
 
 import animeService from '../services/anime.service';
+import IAnimeCharactersContainer from '../models/IAnimeCharactersContainer';
 
 /**
  * Fetch anime characters by id
  * @param id {number | string} Anime id
  */
 export const useFetchAnimeCharactersById = (id: number | string) => {
-  return useQuery([CacheKey.ANIME_CHARACTERS, id], () => animeService.getAnimeCharactersById(id), {
+  return useQuery<IAnimeCharactersContainer, Error>([CacheKey.ANIME_CHARACTERS, id], () => animeService.getAnimeCharactersById(id), {
     refetchOnWindowFocus: false,
     retry: false,
   });

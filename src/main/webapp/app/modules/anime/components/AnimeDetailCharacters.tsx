@@ -2,17 +2,32 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Fade, Progress, Table } from 'reactstrap';
 
+import ErrorAlert from 'app/shared/error/ErrorAlert';
+
 import { useFetchAnimeCharactersById } from '../hooks/useFetchAnimeCharactersById';
+import useAnimeStore from '../store/anime.store';
 
 export const AnimeDetailCharacters = (props: RouteComponentProps<{ id: string }>) => {
   const { match } = props;
 
-  const { data: container, isLoading, isError, error } = useFetchAnimeCharactersById(match.params.id);
+  const { data: container, isLoading, isError, error, refetch } = useFetchAnimeCharactersById(match.params.id);
+
+  const prevTab = useAnimeStore(state => state.prevTab);
+
+  const setActiveTab = useAnimeStore(state => state.setActiveTab);
+
+  const handlerTryAgain = () => {
+    refetch();
+  };
+
+  const handlerGoBack = () => {
+    setActiveTab(prevTab);
+  };
 
   return isLoading ? (
     <Progress animated color="info" value="100" />
   ) : isError ? (
-    <div className="alert alert-danger">{`${error} :(`}</div>
+    <ErrorAlert error={error} tryAgain={handlerTryAgain} goBack={handlerGoBack} />
   ) : container?.characters?.length < 0 ? (
     <div className="alert alert-info">Empty :(</div>
   ) : (
