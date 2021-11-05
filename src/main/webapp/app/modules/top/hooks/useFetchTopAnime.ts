@@ -15,5 +15,6 @@ import BothSubtypeType from '../enums/BothSubtypeType';
 export const useFetchTopAnime = (subtype: AnimeSubtypeType | BothSubtypeType = AnimeSubtypeType.UPCOMING, page = START_PAGE) => {
   return useQuery([CacheKeyType.TOP_ANIME, subtype ? `${subtype}[${page}]` : page], () => topService.getTopAnime(subtype, page), {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 };

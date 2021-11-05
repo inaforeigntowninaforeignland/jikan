@@ -46,7 +46,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
       <h2>
         Top Anime Series
         <div className="d-flex justify-content-end">
-          <Dropdown isOpen={isOpenSubtypeDropdown} toggle={() => toggleSubtypeDropdown(isOpenSubtypeDropdown)}>
+          <Dropdown isOpen={isOpenSubtypeDropdown} toggle={() => toggleSubtypeDropdown()}>
             <DropdownToggle color="primary" caret className="dropdown-toggle text-capitalize">
               {`Top ${activeSubtype}`}
             </DropdownToggle>

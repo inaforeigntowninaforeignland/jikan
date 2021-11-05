@@ -11,5 +11,6 @@ import animeService from '../services/anime.service';
 export const useFetchAnimeById = (id: number | string) => {
   return useQuery([CacheKeyType.ANIME, id], () => animeService.getAnimeById(id), {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 };

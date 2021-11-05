@@ -15,5 +15,6 @@ import BothSubtypeType from '../enums/BothSubtypeType';
 export const useFetchTopManga = (subtype: MangaSubtypeType | BothSubtypeType = MangaSubtypeType.MANGA, page = START_PAGE) => {
   return useQuery([CacheKeyType.TOP_MANGA, subtype ? `${subtype}[${page}]` : page], () => topService.getTopManga(subtype, page), {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 };

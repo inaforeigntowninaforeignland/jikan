@@ -11,18 +11,22 @@ export const setupAxiosInterceptors = ({ interceptors }) => {
     },
   });
 
-  const onResponseError = ({ response: { data } }) => {
-    const message = `${data.status}: ${data.message}`;
+  const onResponseError = error => {
+    const data = error?.response?.data;
 
-    toast.error(message, {
-      position: 'bottom-right',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: 0,
-    });
+    const message = data ? `${data.status}: ${data.message}` : 'Something went wrong. Try again.';
+
+    if (process.env.NODE_ENV === 'development') {
+      toast.error(message, {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+      });
+    }
 
     return Promise.reject(new ResponseError(message));
   };

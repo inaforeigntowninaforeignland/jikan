@@ -11,5 +11,6 @@ import animeService from '../services/anime.service';
 export const useFetchAnimePicturesById = (id: number | string) => {
   return useQuery([CacheKeyType.ANIME_PICTURES, id], () => animeService.getAnimePicturesById(id), {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 };

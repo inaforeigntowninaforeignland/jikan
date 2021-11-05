@@ -15,7 +15,7 @@ interface ITopStore {
   isOpenSubtypeDropdown: boolean;
   setActivePage: (activePage: number) => void;
   setActiveSubtype: (activeSubtype: AnimeSubtypeType) => void;
-  toggleSubtypeDropdown: (isOpenSubtypeDropdown: boolean) => void;
+  toggleSubtypeDropdown: () => void;
 }
 
 const useTopStore = create<ITopStore>(
@@ -25,10 +25,10 @@ const useTopStore = create<ITopStore>(
     isOpenSubtypeDropdown: false,
     setActivePage: activePage => set(() => ({ activePage })),
     setActiveSubtype: activeSubtype => set(() => ({ activeSubtype })),
-    toggleSubtypeDropdown: isOpenSubtypeDropdown =>
+    toggleSubtypeDropdown: () =>
       set(
         produce(state => {
-          state.isOpenSubtypeDropdown = !isOpenSubtypeDropdown;
+          state.isOpenSubtypeDropdown = !state.isOpenSubtypeDropdown;
         })
       ),
   }))

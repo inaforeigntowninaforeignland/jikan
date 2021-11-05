@@ -4,7 +4,6 @@ import MangaSubtypeType from 'app/modules/top/enums/MangaSubtypeType';
 import CacheKeyType from 'app/enums/CacheKeyType';
 
 import searchService from '../services/search.service';
-import useSearchStore from '../store/search.store';
 
 /**
  * Search manga
@@ -12,10 +11,9 @@ import useSearchStore from '../store/search.store';
  * @param type {MangaSubtypeType} Manga subtype
  */
 export const useSearchManga = (query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA) => {
-  const searchPanelStatus = useSearchStore(state => state.searchPanelStatus);
-
   return useQuery([CacheKeyType.SEARCH_MANGA, query ? `${type}:${query}` : type], () => searchService.searchManga(query, type), {
-    enabled: searchPanelStatus,
+    enabled: false,
     refetchOnWindowFocus: false,
+    retry: false,
   });
 };

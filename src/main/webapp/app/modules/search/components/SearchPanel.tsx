@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup, InputGroupText } from 'reactstrap';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
 
 import useSearchStore from '../store/search.store';
+import { useSearchAnime } from '../hooks/useSearchAnime';
 
 export const SearchPanel = () => {
   // region Search input
@@ -26,17 +30,30 @@ export const SearchPanel = () => {
 
   // endregion
 
-  useEffect(() => {
-    setSearchText('');
-  }, []);
+  const history = useHistory();
+
+  const { isLoading, isRefetching, isError, refetch } = useSearchAnime(searchText, activeSearchType);
+
+  const handleSearch = () => {
+    refetch().then(result => {
+      !result.isError && history.push('/anime');
+    });
+  };
 
   return (
     <InputGroup>
-      <Input placeholder="Search Anime..." value={searchText} onChange={event => setSearchText(event.target.value)} />
+      <Input
+        disabled={isLoading || isRefetching}
+        placeholder="Search anime..."
+        value={searchText}
+        onChange={event => setSearchText(event.target.value)}
+      />
 
-      <InputGroupText>Search</InputGroupText>
+      <Button className="mr-2" color={isError ? 'danger' : 'info'} onClick={() => handleSearch()} disabled={isLoading || isRefetching}>
+        <FontAwesomeIcon icon="sync" spin={isLoading || isRefetching} /> Search
+      </Button>
 
-      <Dropdown isOpen={isOpenSearchTypeDropdown} toggle={() => toggleSearchTypeDropdown(isOpenSearchTypeDropdown)}>
+      <Dropdown isOpen={isOpenSearchTypeDropdown} toggle={() => toggleSearchTypeDropdown()} disabled={isLoading || isRefetching}>
         <DropdownToggle color="primary" caret className="dropdown-toggle text-capitalize">
           {`${activeSearchType}`}
         </DropdownToggle>

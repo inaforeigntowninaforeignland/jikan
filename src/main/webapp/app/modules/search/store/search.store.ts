@@ -14,8 +14,7 @@ interface ISearchStore {
   isOpenSearchTypeDropdown: boolean;
   setSearchText: (searchText: string) => void;
   setActiveSearchType: (activeSearchType: AnimeSubtypeType) => void;
-  toggleSearchTypeDropdown: (isOpenSearchTypeDropdown: boolean) => void;
-  toggleSearchPanelStatus: (searchPanelStatus: boolean) => void;
+  toggleSearchTypeDropdown: () => void;
 }
 
 const useSearchStore = create<ISearchStore>(
@@ -26,16 +25,10 @@ const useSearchStore = create<ISearchStore>(
     isOpenSearchTypeDropdown: false,
     setSearchText: searchText => set(() => ({ searchText })),
     setActiveSearchType: activeSearchType => set(() => ({ activeSearchType })),
-    toggleSearchPanelStatus: searchPanelStatus =>
+    toggleSearchTypeDropdown: () =>
       set(
         produce(state => {
-          state.searchPanelStatus = !searchPanelStatus;
-        })
-      ),
-    toggleSearchTypeDropdown: isOpenSearchTypeDropdown =>
-      set(
-        produce(state => {
-          state.isOpenSearchTypeDropdown = !isOpenSearchTypeDropdown;
+          state.isOpenSearchTypeDropdown = !state.isOpenSearchTypeDropdown;
         })
       ),
   }))
