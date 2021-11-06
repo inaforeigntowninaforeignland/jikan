@@ -15,12 +15,13 @@ import ISearchAnimeDetail from '../models/anime/ISearchAnimeDetail';
  */
 export const useSearchAnime = (query?: string, type: AnimeSubtypeType = AnimeSubtypeType.UPCOMING) => {
   return useQuery<IBaseSearchContainer<ISearchAnimeDetail>, IResponseError>(
-    [CacheKey.SEARCH_ANIME, query ? `${type}:${query}` : type],
+    [CacheKey.SEARCH_ANIME, query ? { type, query } : { type }],
     () => searchService.searchAnime(query, type),
     {
       enabled: false,
       refetchOnWindowFocus: false,
       retry: false,
+      cacheTime: 0,
     }
   );
 };

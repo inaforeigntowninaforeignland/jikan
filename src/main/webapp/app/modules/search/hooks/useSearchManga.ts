@@ -15,12 +15,13 @@ import ISearchMangaDetail from '../models/manga/ISearchMangaDetail';
  */
 export const useSearchManga = (query?: string, type: MangaSubtypeType = MangaSubtypeType.MANGA) => {
   return useQuery<IBaseSearchContainer<ISearchMangaDetail>, IResponseError>(
-    [CacheKey.SEARCH_MANGA, query ? `${type}:${query}` : type],
+    [CacheKey.SEARCH_MANGA, query ? { type, query } : { type }],
     () => searchService.searchManga(query, type),
     {
       enabled: false,
       refetchOnWindowFocus: false,
       retry: false,
+      cacheTime: 0,
     }
   );
 };

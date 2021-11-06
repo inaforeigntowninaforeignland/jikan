@@ -12,7 +12,7 @@ import IAnimeCharactersContainer from '../models/IAnimeCharactersContainer';
  */
 export const useFetchAnimeCharactersById = (id: number | string) => {
   return useQuery<IAnimeCharactersContainer, IResponseError>(
-    [CacheKey.ANIME_CHARACTERS, id],
+    [CacheKey.ANIME_CHARACTERS, { id }],
     () => animeService.getAnimeCharactersById(id),
     {
       refetchOnWindowFocus: false,

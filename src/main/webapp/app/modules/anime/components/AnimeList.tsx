@@ -23,12 +23,24 @@ export const AnimeList = (props: RouteComponentProps<{ url: string }>) => {
 
   const container = queryClient.getQueryData<IBaseSearchContainer<ISearchAnimeDetail>>([
     CacheKey.SEARCH_ANIME,
-    searchText ? `${activeSearchType}:${searchText}` : `${activeSearchType}`,
+    searchText ? { type: activeSearchType, query: searchText } : { type: activeSearchType },
   ]);
 
   useEffect(() => {
-    container && setAnime(container.results);
+    if (container && JSON.stringify(container.results) !== JSON.stringify(anime)) {
+      removeCachedAnime();
+      setAnime(container.results);
+    }
   }, [container]);
+
+  const removeCachedAnime = () => {
+    queryClient.removeQueries({
+      predicate: query =>
+        query.queryKey[0] === CacheKey.ANIME_PICTURES ||
+        query.queryKey[0] === CacheKey.ANIME ||
+        query.queryKey[0] === CacheKey.ANIME_CHARACTERS,
+    });
+  };
 
   return (
     <Fade>

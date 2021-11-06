@@ -4,6 +4,8 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Fade, Pro
 import { JhiItemCount, JhiPagination } from 'react-jhipster';
 
 import ErrorAlert from 'app/shared/error/ErrorAlert';
+import { CacheKey } from 'app/helpers/constants';
+import { queryClient } from 'app/helpers/query-client';
 
 import { useFetchTopAnime } from '../hooks/useFetchTopAnime';
 import AnimeSubtypeType from '../enums/AnimeSubtypeType';
@@ -49,6 +51,27 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
     refetch();
   };
 
+  const handlerPagination = currentPage => {
+    removeCachedAnime();
+    setActivePage(currentPage);
+  };
+
+  const handlerSubtypeSelection = currentSubtype => {
+    removeCachedTop();
+    removeCachedAnime();
+    setActiveSubtype(currentSubtype);
+  };
+
+  const removeCachedAnime = () =>
+    queryClient.removeQueries({
+      predicate: query =>
+        query.queryKey[0] === CacheKey.ANIME_PICTURES ||
+        query.queryKey[0] === CacheKey.ANIME ||
+        query.queryKey[0] === CacheKey.ANIME_CHARACTERS,
+    });
+
+  const removeCachedTop = () => queryClient.removeQueries(CacheKey.TOP_ANIME);
+
   return (
     <Fade>
       <h2>
@@ -64,7 +87,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
                 return (
                   <DropdownItem
                     key={key}
-                    onClick={() => setActiveSubtype(AnimeSubtypeType[key])}
+                    onClick={() => handlerSubtypeSelection(AnimeSubtypeType[key])}
                     className={`text-capitalize ${activeSubtype === AnimeSubtypeType[key] ? 'active' : ''}`}
                   >
                     {`Top ${AnimeSubtypeType[key]}`}
@@ -118,7 +141,7 @@ export const TopList = (props: RouteComponentProps<{ url: string }>) => {
             <Row className="justify-content-center">
               <JhiPagination
                 activePage={activePage}
-                onSelect={setActivePage}
+                onSelect={handlerPagination}
                 maxButtons={MAX_PAGINATION_BUTTONS}
                 itemsPerPage={TOP_ANIME_ITEMS_PER_PAGE}
                 totalItems={container?.contentLength}

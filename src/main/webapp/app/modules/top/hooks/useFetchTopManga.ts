@@ -17,7 +17,7 @@ import ITopMangaDetail from '../models/manga/ITopMangaDetail';
  */
 export const useFetchTopManga = (subtype: MangaSubtypeType | BothSubtypeType = MangaSubtypeType.MANGA, page = START_PAGE) => {
   return useQuery<IBaseTopContainer<ITopMangaDetail>, IResponseError>(
-    [CacheKey.TOP_MANGA, subtype ? `${subtype}[${page}]` : page],
+    [CacheKey.TOP_MANGA, subtype ? { subtype, page } : { page }],
     () => topService.getTopManga(subtype, page),
     {
       refetchOnWindowFocus: false,

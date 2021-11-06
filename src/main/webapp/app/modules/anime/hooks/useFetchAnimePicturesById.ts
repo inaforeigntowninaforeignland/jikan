@@ -11,7 +11,7 @@ import animeService from '../services/anime.service';
  * @param id {number | string} Anime id
  */
 export const useFetchAnimePicturesById = (id: number | string) => {
-  return useQuery<IPicturesContainer, IResponseError>([CacheKey.ANIME_PICTURES, id], () => animeService.getAnimePicturesById(id), {
+  return useQuery<IPicturesContainer, IResponseError>([CacheKey.ANIME_PICTURES, { id }], () => animeService.getAnimePicturesById(id), {
     refetchOnWindowFocus: false,
     retry: false,
   });
