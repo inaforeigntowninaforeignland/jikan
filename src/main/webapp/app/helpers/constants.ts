@@ -34,3 +34,11 @@ export const RouteKey = {
 };
 
 // endregion
+
+// region Keyboard
+
+export const KeyboardKey = {
+  ENTER: 'Enter',
+};
+
+// endregion

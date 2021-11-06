@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { RouteKey, START_PAGE } from 'app/helpers/constants';
+import { RouteKey, START_PAGE, KeyboardKey } from 'app/helpers/constants';
 import AnimeSubtypeType from 'app/modules/top/enums/AnimeSubtypeType';
 import useTopStore from 'app/modules/top/store/top.store';
 
@@ -36,6 +36,8 @@ export const SearchPanel = () => {
 
   const history = useHistory();
 
+  const location = useLocation();
+
   const { isLoading, isRefetching, isError, refetch } = useSearchAnime(searchText, activeSearchType);
 
   const handleSearch = () => {
@@ -45,7 +47,7 @@ export const SearchPanel = () => {
   };
 
   const handleKeyDown = event => {
-    if (event.key === 'Enter') {
+    if (event.key === KeyboardKey.ENTER) {
       handleSearch();
     }
   };
@@ -57,9 +59,11 @@ export const SearchPanel = () => {
 
   return (
     <InputGroup>
-      <Button onClick={() => handleHome()} className="mr-2" color="info">
-        🏠
-      </Button>
+      {location.pathname !== `/${RouteKey.TOP}` && (
+        <Button onClick={() => handleHome()} className="mr-2" color="info">
+          🏠
+        </Button>
+      )}
 
       <Input
         type="search"
